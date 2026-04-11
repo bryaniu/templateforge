@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aperture — Photographer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080808;
+      --bg2: #111;
+      --text: #f0ebe4;
+      --muted: rgba(240,235,228,0.45);
+      --accent: #c9a96e;
+      --border: rgba(255,255,255,0.07);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 52px; height: 72px;
+      mix-blend-mode: normal;
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; letter-spacing: 2px; color: var(--text); }
+    .nav-links { display: flex; gap: 36px; }
+    .nav-links a { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); transition: color 0.3s; font-weight: 500; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-contact {
+      font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent);
+      padding-bottom: 2px; border-bottom: 1px solid var(--accent); font-weight: 500;
+    }
+
+    /* HERO - FULL BLEED */
+    .hero {
+      height: 100vh; position: relative; display: flex;
+      align-items: flex-end; padding: 0 52px 72px; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #0a0a12 0%, #1a1008 50%, #0a0812 100%);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,8,0.9) 0%, rgba(8,8,8,0.2) 60%, transparent 100%);
+    }
+    /* Photo-like textured panels */
+    .photo-panels {
+      position: absolute; inset: 0; display: grid;
+      grid-template-columns: 1fr 1fr 1fr; gap: 2px;
+      opacity: 0.6;
+    }
+    .photo-panel { background-size: cover; background-position: center; }
+    .panel-1 { background: linear-gradient(160deg, #1a1408 0%, #3d2e18 40%, #1a1408 100%); }
+    .panel-2 { background: linear-gradient(160deg, #0a0f1a 0%, #1a2035 40%, #0a0f1a 100%); }
+    .panel-3 { background: linear-gradient(160deg, #1a0a0a 0%, #3d1818 40%, #1a0a0a 100%); }
+    .panel-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: clamp(48px, 8vw, 96px); opacity: 0.6; }
+
+    .hero-content { position: relative; z-index: 1; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(56px, 9vw, 120px); font-weight: 700;
+      line-height: 0.95; letter-spacing: -2px; margin-bottom: 24px;
+      color: var(--text);
+    }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-meta { display: flex; align-items: center; gap: 32px; }
+    .hero-meta p { font-size: 14px; color: var(--muted); max-width: 300px; line-height: 1.6; }
+    .hero-scroll { display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); }
+    .scroll-line { width: 48px; height: 1px; background: var(--muted); }
+
+    /* GALLERY */
+    .gallery-section { padding: 96px 0; }
+    .gallery-header { padding: 0 52px; display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 48px; }
+    .gallery-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 52px); font-weight: 700; letter-spacing: -1px; }
+    .gallery-filter { display: flex; gap: 24px; }
+    .filter-btn { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); background: none; border: none; cursor: pointer; transition: color 0.2s; font-family: inherit; padding: 0; }
+    .filter-btn.active, .filter-btn:hover { color: var(--text); }
+
+    .masonry { column-count: 3; column-gap: 2px; padding: 0 2px; }
+    .masonry-item {
+      break-inside: avoid; margin-bottom: 2px;
+      position: relative; overflow: hidden; cursor: pointer;
+    }
+    .masonry-thumb {
+      width: 100%; display: flex; align-items: center; justify-content: center;
+      font-size: clamp(32px, 5vw, 64px); transition: transform 0.5s ease;
+    }
+    .masonry-item:hover .masonry-thumb { transform: scale(1.04); }
+    .masonry-caption {
+      position: absolute; inset: 0; background: rgba(0,0,0,0);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 20px; opacity: 0; transition: all 0.3s;
+    }
+    .masonry-item:hover .masonry-caption { opacity: 1; background: rgba(0,0,0,0.5); }
+    .masonry-caption h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; }
+    .masonry-caption p { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-top: 4px; }
+
+    /* ABOUT */
+    .about-section {
+      padding: 96px 52px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: center;
+    }
+    .about-portrait {
+      aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
+      background: linear-gradient(160deg, #1a1408, #3d2e18, #1a1408);
+      display: flex; align-items: center; justify-content: center; font-size: 80px;
+      position: relative;
+    }
+    .about-portrait::after {
+      content: ''; position: absolute; inset: 0;
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 4px;
+    }
+    .about-eyebrow { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .about-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3.5vw, 44px); font-weight: 700; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 24px; }
+    .about-text p { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
+    .awards { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .award { display: flex; align-items: center; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .award-year { font-size: 12px; color: var(--accent); font-weight: 600; width: 40px; }
+    .award-name { font-size: 14px; font-weight: 500; }
+    .award-org { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* CONTACT */
+    .contact-section { padding: 120px 52px; border-top: 1px solid var(--border); }
+    .contact-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .contact-inner h2 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 700; letter-spacing: -1.5px; margin-bottom: 16px; }
+    .contact-inner h2 em { font-style: italic; color: var(--accent); }
+    .contact-inner p { font-size: 16px; color: var(--muted); margin-bottom: 40px; line-height: 1.7; }
+    .contact-links { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+    .contact-link { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); border-bottom: 1px solid transparent; padding-bottom: 2px; transition: all 0.2s; }
+    .contact-link:hover { color: var(--text); border-color: var(--text); }
+
+    footer { padding: 28px 52px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 11px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+
+    /* TEMPLATE BANNER */
+    .template-banner {
+      position: fixed; bottom: 20px; right: 20px; z-index: 999;
+      background: var(--bg2); border: 1px solid rgba(201,169,110,0.3);
+      border-radius: 12px; padding: 14px 20px;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .template-banner p { font-size: 13px; color: var(--muted); }
+    .template-banner strong { color: var(--text); }
+    .banner-btn { padding: 8px 16px; background: var(--accent); color: #000; font-size: 13px; font-weight: 700; border-radius: 6px; white-space: nowrap; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 0 20px 48px; }
+      .gallery-header { padding: 0 20px; flex-direction: column; gap: 16px; }
+      .masonry { column-count: 2; }
+      .about-section { padding: 64px 20px; grid-template-columns: 1fr; gap: 40px; }
+      .contact-section { padding: 64px 20px; }
+      footer { padding: 20px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">JAMES WARD</div>
+    <div class="nav-links">
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-contact">Book a Session</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="photo-panels">
+      <div class="photo-panel panel-1"><div class="panel-inner">🌄</div></div>
+      <div class="photo-panel panel-2"><div class="panel-inner">🏙</div></div>
+      <div class="photo-panel panel-3"><div class="panel-inner">🌊</div></div>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Photographer & Visual Storyteller</div>
+      <h1 class="hero-title">Capturing<br/><em>moments</em><br/>that matter.</h1>
+      <div class="hero-meta">
+        <p>Landscape, portrait, and documentary photography. Based in Iceland, shooting worldwide.</p>
+        <div class="hero-scroll">
+          <div class="scroll-line"></div>
+          Scroll to explore
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery-section" id="gallery">
+    <div class="gallery-header">
+      <h2>Portfolio</h2>
+      <div class="gallery-filter">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">Landscape</button>
+        <button class="filter-btn">Portrait</button>
+        <button class="filter-btn">Documentary</button>
+      </div>
+    </div>
+    <div class="masonry">
+      <div class="masonry-item">
+        <div class="masonry-thumb" style="background:linear-gradient(160deg,#1a1408,#3d2e18);height:340px;">🌄</div>
+        <div class="masonry-caption"><h3>Highlands, Iceland</h3><p>Landscape · 2025</p></div>
+      </div>
+      <div class="masonry-item">
+        <div class="masonry-thumb" style="background:linear-gradient(160deg,#0a0f1a,#1a2035);height:220px;">🏙</div>
+        <div class="masonry-caption"><h3>Tokyo Nights</h3><p>Urban · 2025</p></div>
+      </div>
+      <div class="masonry-item">
+        <div class="masonry-thumb" style="background:linear-gradient(160deg,#1a0a0a,#3d1818);height:280px;">🌊</div>
+        <div class="masonry-caption"><h3>Atlantic Shores</h3><p>Seascape · 2024</p></div>
+      </div>
+      <div class="masonry-item">
+        <div class="masonry-thumb" style="background:linear-gradient(160deg,#0a1a0a,#183d18);height:250px;">🌲</div>
+        <div class="masonry-caption"><h3>Ancient Forest</h3><p>Nature · 2024</p></div>
+      </div>
+      <div class="masonry-item">
+        <div class="masonry-thumb" style="background:linear-gradient(160deg,#1a1a0a,#3d3d18);height:360px;">🌅</div>
+        <div class="masonry-caption"><h3>Desert Dawn</h3><p>Landscape · 2025</p></div>
+      </div>
+      <div class="masonry-item">
+        <div class="masonry-thumb" style="background:linear-gradient(160deg,#0a0a1a,#18183d);height:200px;">✨</div>
+        <div class="masonry-caption"><h3>Milky Way, Faroe</h3><p>Astrophotography · 2025</p></div>
+      </div>
+      <div class="masonry-item">
+        <div class="masonry-thumb" style="background:linear-gradient(160deg,#1a0a1a,#3d183d);height:290px;">🏔</div>
+        <div class="masonry-caption"><h3>Peak Light</h3><p>Mountain · 2024</p></div>
+      </div>
+      <div class="masonry-item">
+        <div class="masonry-thumb" style="background:linear-gradient(160deg,#1a1208,#3d2e12);height:230px;">🦅</div>
+        <div class="masonry-caption"><h3>In Flight</h3><p>Wildlife · 2025</p></div>
+      </div>
+      <div class="masonry-item">
+        <div class="masonry-thumb" style="background:linear-gradient(160deg,#08121a,#12253d);height:310px;">🌨</div>
+        <div class="masonry-caption"><h3>First Snow</h3><p>Landscape · 2024</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-portrait">📷</div>
+    <div class="about-text">
+      <div class="about-eyebrow">About James</div>
+      <h2>Fifteen years chasing the perfect light.</h2>
+      <p>I'm a documentary and landscape photographer who believes that patience, presence, and technical mastery are what separate a snapshot from a story.</p>
+      <p>My work has been published in National Geographic, TIME, and featured in galleries across Europe and North America.</p>
+      <div class="awards">
+        <div class="award">
+          <div class="award-year">2025</div>
+          <div><div class="award-name">World Press Photo — Nature</div><div class="award-org">World Press Photo Foundation</div></div>
+        </div>
+        <div class="award">
+          <div class="award-year">2024</div>
+          <div><div class="award-name">Sony World Photography — Gold</div><div class="award-org">Sony Europe</div></div>
+        </div>
+        <div class="award">
+          <div class="award-year">2023</div>
+          <div><div class="award-name">National Geographic — Finalist</div><div class="award-org">National Geographic Society</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <h2>Let's create something <em>beautiful</em>.</h2>
+      <p>Available for commercial shoots, editorial assignments, fine art prints, and private sessions worldwide.</p>
+      <div class="contact-links">
+        <a href="#" class="contact-link">james@wardphoto.com</a>
+        <a href="#" class="contact-link">Instagram</a>
+        <a href="#" class="contact-link">500px</a>
+        <a href="#" class="contact-link">Prints Shop</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>James Ward Photography</span>
+    <span>© 2026 All rights reserved</span>
+  </footer>
+
+  <div class="template-banner">
+    <div>
+      <p><strong>Aperture</strong> — Photographer Portfolio</p>
+      <p>by TemplateForge</p>
+    </div>
+    <a href="../../index.html#templates" class="banner-btn">Get This Template →</a>
+  </div>
+
+  <script>
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

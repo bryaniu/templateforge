@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Meridian — Digital Marketing Agency</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#f8f6ff;--dark:#12101f;--purple:#6d28d9;--purple-l:#8b5cf6;--muted:#6b6880;--border:#e5e0f5;--card:#fff}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}a{color:inherit;text-decoration:none}
+    nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:68px;background:rgba(248,246,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .logo{font-size:20px;font-weight:800;letter-spacing:-.5px}.logo span{color:var(--purple)}
+    .nav-links{display:flex;gap:32px}.nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}.nav-links a:hover{color:var(--dark)}
+    .nav-cta{padding:10px 22px;background:var(--purple);color:#fff;font-size:14px;font-weight:700;border-radius:8px;transition:all .2s}.nav-cta:hover{background:var(--purple-l);transform:translateY(-1px)}
+    /* HERO */
+    .hero{padding:100px 52px 80px;display:grid;grid-template-columns:1fr 480px;gap:60px;align-items:center;max-width:1300px;margin:0 auto}
+    .hero-chip{display:inline-flex;align-items:center;gap:8px;background:#ede9fe;color:var(--purple);font-size:12px;font-weight:700;padding:6px 14px;border-radius:100px;margin-bottom:22px}
+    .hero-title{font-size:clamp(44px,5.5vw,72px);font-weight:800;letter-spacing:-2.5px;line-height:1;margin-bottom:20px}
+    .hero-title .grad{background:linear-gradient(135deg,var(--purple),#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-desc{font-size:17px;color:var(--muted);line-height:1.75;max-width:480px;margin-bottom:36px}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
+    .btn-purple{padding:14px 28px;background:var(--purple);color:#fff;font-size:15px;font-weight:700;border-radius:10px;transition:all .2s;display:inline-block}.btn-purple:hover{background:var(--purple-l);transform:translateY(-2px);box-shadow:0 8px 24px rgba(109,40,217,.3)}
+    .btn-outline{padding:14px 28px;border:1.5px solid var(--border);color:var(--dark);font-size:15px;font-weight:600;border-radius:10px;transition:all .2s;display:inline-block}.btn-outline:hover{border-color:var(--purple);color:var(--purple)}
+    .hero-logos p{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:14px}
+    .logo-row{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+    .logo-pill{font-size:13px;font-weight:700;color:rgba(18,16,31,.3);letter-spacing:-.5px}
+    .hero-visual{display:flex;flex-direction:column;gap:16px}
+    .metric-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;box-shadow:0 4px 20px rgba(0,0,0,.05)}
+    .metric-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+    .metric-val{font-size:26px;font-weight:800;letter-spacing:-1px}
+    .metric-label{font-size:13px;color:var(--muted);margin-top:2px}
+    .metric-change{margin-left:auto;font-size:13px;font-weight:700;color:#059669;background:#d1fae5;padding:4px 10px;border-radius:100px}
+    /* SERVICES */
+    .services{padding:96px 52px;background:var(--dark)}
+    .services-inner{max-width:1200px;margin:0 auto}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+    .svc{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:28px;transition:all .2s}
+    .svc:hover{border-color:rgba(109,40,217,.4);transform:translateY(-3px)}
+    .svc-icon{font-size:32px;margin-bottom:16px}
+    .svc h3{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px}
+    .svc p{font-size:14px;color:rgba(255,255,255,.45);line-height:1.65}
+    .svc-link{font-size:13px;font-weight:700;color:var(--purple-l);margin-top:14px;display:inline-flex;align-items:center;gap:4px}
+    /* RESULTS */
+    .results{padding:96px 52px;max-width:1200px;margin:0 auto}
+    .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px}
+    .result-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center}
+    .result-num{font-size:44px;font-weight:800;letter-spacing:-2px;background:linear-gradient(135deg,var(--purple),#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+    .result-label{font-size:14px;color:var(--muted)}
+    /* TESTIMONIAL */
+    .testi{padding:96px 52px;background:#ede9fe}
+    .testi-inner{max-width:800px;margin:0 auto;text-align:center}
+    .testi blockquote{font-size:clamp(20px,3vw,30px);font-weight:600;letter-spacing:-.5px;line-height:1.45;margin-bottom:28px;color:var(--dark)}
+    .testi-author{display:flex;align-items:center;justify-content:center;gap:14px}
+    .ta-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--purple),#ec4899);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px}
+    footer{padding:32px 52px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+    .template-banner{position:fixed;bottom:20px;right:20px;z-index:999;background:var(--dark);border:1px solid rgba(109,40,217,.4);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+    .template-banner p{font-size:13px;color:rgba(255,255,255,.4)}.template-banner strong{color:#fff}
+    .banner-btn{padding:8px 16px;background:var(--purple);color:#fff;font-size:13px;font-weight:700;border-radius:6px;white-space:nowrap}
+    @media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.hero{grid-template-columns:1fr;padding:80px 20px 48px}.services{padding:64px 20px}.services-grid{grid-template-columns:1fr}.results{padding:64px 20px}.results-grid{grid-template-columns:1fr 1fr}.testi{padding:64px 20px}footer{padding:20px;flex-direction:column;gap:8px}}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Meridian<span>.</span></div>
+    <div class="nav-links"><a href="#">Services</a><a href="#">Results</a><a href="#">About</a><a href="#">Blog</a></div>
+    <a href="#" class="nav-cta">Get a Free Audit</a>
+  </nav>
+  <section class="hero">
+    <div>
+      <div class="hero-chip">📈 Award-Winning Digital Agency</div>
+      <h1 class="hero-title">Grow faster<br/>with <span class="grad">smarter</span><br/>marketing.</h1>
+      <p class="hero-desc">We help ambitious brands scale revenue through data-driven SEO, paid media, and conversion rate optimization. Average client sees 3.4× ROI.</p>
+      <div class="hero-actions"><a href="#" class="btn-purple">Get a Free Strategy Call</a><a href="#" class="btn-outline">See Our Results</a></div>
+      <div class="hero-logos"><p>Trusted by growth-stage teams at</p><div class="logo-row"><span class="logo-pill">Notion</span><span class="logo-pill">Linear</span><span class="logo-pill">Vercel</span><span class="logo-pill">Loom</span><span class="logo-pill">Pitch</span></div></div>
+    </div>
+    <div class="hero-visual">
+      <div class="metric-card"><div class="metric-icon" style="background:#ede9fe;">📈</div><div><div class="metric-val">+312%</div><div class="metric-label">Organic traffic — 90 days</div></div><span class="metric-change">+312%</span></div>
+      <div class="metric-card"><div class="metric-icon" style="background:#d1fae5;">💰</div><div><div class="metric-val">$4.2M</div><div class="metric-label">Revenue generated last quarter</div></div><span class="metric-change">↑ 84%</span></div>
+      <div class="metric-card"><div class="metric-icon" style="background:#fef3c7;">⚡</div><div><div class="metric-val">2.8×</div><div class="metric-label">Avg. ROAS on paid campaigns</div></div><span class="metric-change">↑ 41%</span></div>
+    </div>
+  </section>
+  <section class="services">
+    <div class="services-inner">
+      <h2 style="font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1.5px;color:#fff;margin-bottom:10px">Full-Stack Growth Services</h2>
+      <p style="color:rgba(255,255,255,.4);font-size:17px">Everything you need to acquire, convert, and retain customers at scale.</p>
+      <div class="services-grid">
+        <div class="svc"><div class="svc-icon">🔍</div><h3>SEO & Content</h3><p>Technical SEO, content strategy, and link building that compounds over time.</p><div class="svc-link">Learn more →</div></div>
+        <div class="svc"><div class="svc-icon">🎯</div><h3>Paid Media</h3><p>Google, Meta, and LinkedIn campaigns engineered for maximum ROAS from day one.</p><div class="svc-link">Learn more →</div></div>
+        <div class="svc"><div class="svc-icon">⚗️</div><h3>CRO & Analytics</h3><p>A/B testing, heatmaps, and funnel analysis that turn traffic into revenue.</p><div class="svc-link">Learn more →</div></div>
+      </div>
+    </div>
+  </section>
+  <section class="results">
+    <h2 style="font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1.5px">Results that speak for themselves</h2>
+    <div class="results-grid">
+      <div class="result-card"><div class="result-num">340%</div><div class="result-label">Average traffic increase</div></div>
+      <div class="result-card"><div class="result-num">2.8×</div><div class="result-label">Average ROAS</div></div>
+      <div class="result-card"><div class="result-num">94%</div><div class="result-label">Client retention rate</div></div>
+      <div class="result-card"><div class="result-num">$40M+</div><div class="result-label">Revenue generated</div></div>
+    </div>
+  </section>
+  <section class="testi">
+    <div class="testi-inner">
+      <blockquote>"Meridian took us from 8k to 140k monthly visitors in under 6 months. The SEO work alone paid for their retainer 12× over."</blockquote>
+      <div class="testi-author"><div class="ta-avatar">JL</div><div><strong>Jordan Lee</strong><br/><span style="font-size:13px;color:var(--muted)">CEO, Listify · $12M ARR</span></div></div>
+    </div>
+  </section>
+  <footer><span>© 2026 Meridian Growth Agency</span><span>Privacy · Terms</span></footer>
+  <div class="template-banner"><div><p><strong>Meridian</strong> — Marketing Agency Template</p><p>by TemplateForge</p></div><a href="../../index.html#templates" class="banner-btn">Get This Template →</a></div>
+</body>
+</html>

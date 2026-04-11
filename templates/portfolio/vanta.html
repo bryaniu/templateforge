@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vanta — Developer Portfolio Template</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #0f1525;
+      --bg3: #151d35;
+      --green: #00ff88;
+      --blue: #00d4ff;
+      --purple: #7c3aed;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --border: rgba(255,255,255,0.07);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      background: rgba(10,14,26,0.85); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--green); }
+    .nav-logo span { color: var(--muted); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 13px; color: var(--muted); font-family: 'JetBrains Mono', monospace; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta {
+      font-family: 'JetBrains Mono', monospace; font-size: 13px;
+      padding: 8px 18px; border: 1px solid var(--green); border-radius: 6px;
+      color: var(--green); transition: all 0.2s;
+    }
+    .nav-cta:hover { background: var(--green); color: var(--bg); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 100px 48px 80px; position: relative; overflow: hidden;
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(var(--green) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--green) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .hero-glow {
+      position: absolute; width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(0,255,136,0.08) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; max-width: 720px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--green);
+      margin-bottom: 24px;
+    }
+    .hero-tag::before { content: '//'; color: var(--muted); }
+    .hero-title { font-size: clamp(40px, 6vw, 72px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; margin-bottom: 12px; }
+    .hero-title .name { color: var(--green); }
+    .hero-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 18px; color: var(--blue); margin-bottom: 24px; }
+    .hero-desc { font-size: 17px; color: var(--muted); max-width: 560px; line-height: 1.7; margin-bottom: 40px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 14px 28px; background: var(--green); color: var(--bg);
+      font-weight: 700; font-size: 14px; border-radius: 8px; border: none;
+      cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,255,136,0.3); }
+    .btn-secondary {
+      padding: 14px 28px; background: transparent; color: var(--text);
+      font-weight: 600; font-size: 14px; border-radius: 8px;
+      border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; font-family: inherit;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+
+    /* TERMINAL CARD */
+    .terminal {
+      position: absolute; right: 48px; top: 50%; transform: translateY(-50%);
+      width: 420px; background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+    .terminal-bar {
+      padding: 12px 16px; background: var(--bg3);
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-r { background: #ef4444; }
+    .dot-y { background: #f59e0b; }
+    .dot-g { background: #22c55e; }
+    .terminal-title { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); margin-left: auto; margin-right: auto; }
+    .terminal-body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 2; }
+    .t-dim { color: var(--muted); }
+    .t-green { color: var(--green); }
+    .t-blue { color: var(--blue); }
+    .t-purple { color: #a78bfa; }
+    .t-yellow { color: #fbbf24; }
+    .cursor { display: inline-block; width: 8px; height: 16px; background: var(--green); animation: blink 1s step-end infinite; vertical-align: middle; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ABOUT */
+    .section { padding: 96px 48px; }
+    .section-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--green); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 16px; }
+    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .section-alt { background: var(--bg2); }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 40px; }
+    .skill-group {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px;
+    }
+    .skill-group h4 { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--green); margin-bottom: 14px; }
+    .skill-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .skill-tag {
+      font-size: 12px; font-family: 'JetBrains Mono', monospace;
+      padding: 4px 10px; border-radius: 4px;
+      border: 1px solid var(--border); color: var(--text);
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; margin-top: 40px; }
+    .project-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; transition: all 0.25s;
+    }
+    .project-card:hover { transform: translateY(-4px); border-color: rgba(0,255,136,0.2); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    .project-thumb {
+      height: 180px; display: flex; align-items: center; justify-content: center;
+      font-size: 48px; position: relative; overflow: hidden;
+    }
+    .project-body { padding: 20px; }
+    .project-name { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .project-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
+    .project-stack { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+    .stack-tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); background: rgba(0,255,136,0.07); border: 1px solid rgba(0,255,136,0.15); padding: 3px 8px; border-radius: 4px; }
+    .project-links { display: flex; gap: 12px; }
+    .project-link { font-size: 13px; font-weight: 600; color: var(--blue); border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .project-link:hover { border-color: var(--blue); }
+
+    /* EXPERIENCE */
+    .exp-list { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid; grid-template-columns: 160px 1fr;
+      gap: 32px; padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-item:first-child { border-top: 1px solid var(--border); }
+    .exp-date { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); padding-top: 4px; }
+    .exp-role { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .exp-company { font-size: 14px; color: var(--green); margin-bottom: 10px; font-weight: 600; }
+    .exp-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 40px; }
+    .contact-info p { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 28px; }
+    .contact-links { display: flex; flex-direction: column; gap: 14px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text);
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--green); }
+    .contact-link-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--bg3); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+    .contact-form { display: flex; flex-direction: column; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+    .form-input {
+      background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+      padding: 11px 14px; color: var(--text); font-size: 14px; font-family: inherit;
+      outline: none; transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--green); }
+    textarea.form-input { resize: vertical; min-height: 100px; }
+
+    /* FOOTER */
+    footer { padding: 32px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+
+    /* TEMPLATE BANNER */
+    .template-banner {
+      position: fixed; bottom: 20px; right: 20px; z-index: 999;
+      background: var(--bg2); border: 1px solid rgba(0,255,136,0.3);
+      border-radius: 12px; padding: 14px 20px;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .template-banner p { font-size: 13px; color: var(--muted); }
+    .template-banner strong { color: var(--text); }
+    .banner-btn {
+      padding: 8px 16px; background: var(--green); color: var(--bg);
+      font-size: 13px; font-weight: 700; border-radius: 6px;
+      white-space: nowrap; transition: all 0.2s;
+    }
+    .banner-btn:hover { transform: translateY(-1px); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; flex-direction: column; }
+      .terminal { position: static; transform: none; width: 100%; margin-top: 40px; }
+      .section { padding: 64px 24px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 8px; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo"><span>~/</span>alex.dev</div>
+    <div class="nav-links">
+      <a href="#skills">skills</a>
+      <a href="#projects">projects</a>
+      <a href="#experience">experience</a>
+      <a href="#contact">contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">hire_me()</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-tag">available for work</div>
+      <h1 class="hero-title">Hi, I'm <span class="name">Alex Morgan</span></h1>
+      <div class="hero-subtitle">&gt; Full-Stack Engineer &amp; OSS Contributor</div>
+      <p class="hero-desc">I build fast, scalable, and beautiful web applications. 6 years crafting products used by millions — from early-stage startups to Fortune 500 teams.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-secondary">Get In Touch</a>
+      </div>
+    </div>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <span class="terminal-title">alex@dev ~ </span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-dim">$</span> <span class="t-green">whoami</span></div>
+        <div class="t-blue">alex_morgan</div>
+        <br/>
+        <div><span class="t-dim">$</span> <span class="t-green">cat</span> <span class="t-yellow">about.json</span></div>
+        <div class="t-dim">{</div>
+        <div>&nbsp;&nbsp;<span class="t-purple">"role"</span>: <span class="t-yellow">"Full-Stack Engineer"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-purple">"exp"</span>: <span class="t-blue">6</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-purple">"location"</span>: <span class="t-yellow">"San Francisco, CA"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="t-purple">"open_to"</span>: <span class="t-green">true</span></div>
+        <div class="t-dim">}</div>
+        <br/>
+        <div><span class="t-dim">$</span> <span class="t-green">./run</span> <span class="t-yellow">portfolio</span> <span class="cursor"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section section-alt" id="skills">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="section-label">// 02. skills</div>
+      <h2 class="section-title">What I Work With</h2>
+      <p style="color:var(--muted);font-size:16px;max-width:520px;">A curated stack built over 6 years — I know when to use each tool and why.</p>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h4>// Frontend</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Next.js</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Vue 3</span>
+            <span class="skill-tag">Tailwind</span>
+            <span class="skill-tag">Framer Motion</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>// Backend</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Go</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">Redis</span>
+            <span class="skill-tag">GraphQL</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>// Infrastructure</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">AWS</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">Kubernetes</span>
+            <span class="skill-tag">Terraform</span>
+            <span class="skill-tag">GitHub Actions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="section-label">// 03. projects</div>
+      <h2 class="section-title">Selected Work</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#0f1a2e,#1a2d4e);">🚀</div>
+          <div class="project-body">
+            <div class="project-name">Launchpad CRM</div>
+            <div class="project-desc">A real-time CRM for sales teams with pipeline automation, AI-powered lead scoring, and Slack integration.</div>
+            <div class="project-stack">
+              <span class="stack-tag">Next.js</span>
+              <span class="stack-tag">Go</span>
+              <span class="stack-tag">PostgreSQL</span>
+              <span class="stack-tag">Redis</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">Live Demo →</a>
+              <a href="#" class="project-link">GitHub →</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#0f2e1a,#1a4e2d);">📊</div>
+          <div class="project-body">
+            <div class="project-name">Dataflow Dashboard</div>
+            <div class="project-desc">Analytics platform processing 10M+ events/day with real-time charts, custom funnels, and alerting.</div>
+            <div class="project-stack">
+              <span class="stack-tag">React</span>
+              <span class="stack-tag">Python</span>
+              <span class="stack-tag">ClickHouse</span>
+              <span class="stack-tag">Kafka</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">Live Demo →</a>
+              <a href="#" class="project-link">GitHub →</a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-thumb" style="background:linear-gradient(135deg,#1a0f2e,#2d1a4e);">🔐</div>
+          <div class="project-body">
+            <div class="project-name">AuthKit OSS</div>
+            <div class="project-desc">Open-source authentication library with OAuth2, passkeys, and magic links. 4.2k GitHub stars.</div>
+            <div class="project-stack">
+              <span class="stack-tag">TypeScript</span>
+              <span class="stack-tag">Node.js</span>
+              <span class="stack-tag">WebAuthn</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">Live Demo →</a>
+              <a href="#" class="project-link">GitHub →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section section-alt" id="experience">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="section-label">// 04. experience</div>
+      <h2 class="section-title">Work History</h2>
+      <div class="exp-list">
+        <div class="exp-item">
+          <div class="exp-date">2022 — Present</div>
+          <div>
+            <div class="exp-role">Senior Software Engineer</div>
+            <div class="exp-company">Vercel</div>
+            <div class="exp-desc">Leading frontend infrastructure for the Edge Network. Reduced cold start times by 40% and improved DX tooling used by 700k+ developers.</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-date">2020 — 2022</div>
+          <div>
+            <div class="exp-role">Full-Stack Engineer</div>
+            <div class="exp-company">Linear</div>
+            <div class="exp-desc">Built core features of the issue tracker — real-time sync engine, keyboard-first navigation, and the GitHub/Slack integration layer.</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-date">2018 — 2020</div>
+          <div>
+            <div class="exp-role">Software Engineer</div>
+            <div class="exp-company">Stripe</div>
+            <div class="exp-desc">Worked on the Dashboard team, building analytics views and developer tooling for the Stripe API. Shipped the redesigned API Logs UI.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div style="max-width:1100px;margin:0 auto;">
+      <div class="section-label">// 05. contact</div>
+      <h2 class="section-title">Let's Work Together</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p>I'm open to full-time roles, contract work, and interesting side projects. If you're building something ambitious, let's talk.</p>
+          <div class="contact-links">
+            <a href="#" class="contact-link"><div class="contact-link-icon">✉</div>alex@morgan.dev</a>
+            <a href="#" class="contact-link"><div class="contact-link-icon">⬡</div>github.com/alexmorgan</a>
+            <a href="#" class="contact-link"><div class="contact-link-icon">in</div>linkedin.com/in/alexmorgan</a>
+            <a href="#" class="contact-link"><div class="contact-link-icon">𝕏</div>@alexmorgan_dev</a>
+          </div>
+        </div>
+        <form class="contact-form" onsubmit="return false;">
+          <div class="form-group">
+            <label class="form-label">// name</label>
+            <input type="text" class="form-input" placeholder="Jane Smith" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">// email</label>
+            <input type="email" class="form-input" placeholder="jane@company.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">// message</label>
+            <textarea class="form-input" placeholder="Tell me about your project..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary">send_message()</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>// designed & built by alex morgan</p>
+    <p>// 2026 — all rights reserved</p>
+  </footer>
+
+  <div class="template-banner">
+    <div>
+      <p><strong>Vanta</strong> — Developer Portfolio Template</p>
+      <p>by TemplateForge</p>
+    </div>
+    <a href="../../index.html#templates" class="banner-btn">Get This Template →</a>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TemplateForge — Premium Website Templates</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">Template<span>Forge</span></a>
+      <ul class="nav-links">
+        <li><a href="#templates">Templates</a></li>
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#" class="btn btn-ghost">Sign In</a>
+        <button class="cart-btn" id="cartBtn" aria-label="Open cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M16 10a4 4 0 01-8 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="cart-badge" id="cartBadge" style="display:none;">0</span>
+        </button>
+        <a href="#templates" class="btn btn-primary">Browse Templates</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#templates">Templates</a>
+      <a href="#categories">Categories</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#" class="btn btn-primary" style="margin-top:8px;">Browse Templates</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    <div class="container">
+      <div class="hero-badge">200+ Premium Templates</div>
+      <h1 class="hero-title">Launch Your Website<br /><span>Without the Hassle</span></h1>
+      <p class="hero-subtitle">
+        Professionally designed, pixel-perfect templates for every business.
+        Buy once, customize forever, ship in minutes.
+      </p>
+      <div class="hero-cta">
+        <a href="#templates" class="btn btn-primary btn-lg">Explore Templates</a>
+        <a href="#" class="btn btn-outline btn-lg">Watch Demo</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>12,000+</strong><span>Happy Customers</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>200+</strong><span>Templates</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>4.9/5</strong><span>Average Rating</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF STRIP -->
+  <div class="proof-strip">
+    <div class="proof-inner">
+      <span>Trusted by teams at</span>
+      <div class="proof-logos">
+        <span class="proof-logo">Notion Co.</span>
+        <span class="proof-logo">Arc Studio</span>
+        <span class="proof-logo">Meridian Labs</span>
+        <span class="proof-logo">Waverly Inc.</span>
+        <span class="proof-logo">Crestline</span>
+        <span class="proof-logo">Pulse Media</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="section-header">
+        <h2>Browse by Category</h2>
+        <p>Find the perfect template for your industry or use case</p>
+      </div>
+      <div class="categories-grid">
+        <button class="cat-card active" data-filter="all">
+          <div class="cat-icon">&#9733;</div>
+          <span>All Templates</span>
+          <small>200+</small>
+        </button>
+        <button class="cat-card" data-filter="portfolio">
+          <div class="cat-icon">&#9632;</div>
+          <span>Portfolio</span>
+          <small>5</small>
+        </button>
+        <button class="cat-card" data-filter="ecommerce">
+          <div class="cat-icon">&#9679;</div>
+          <span>E-Commerce</span>
+          <small>3</small>
+        </button>
+        <button class="cat-card" data-filter="agency">
+          <div class="cat-icon">&#9650;</div>
+          <span>Agency</span>
+          <small>3</small>
+        </button>
+        <button class="cat-card" data-filter="blog">
+          <div class="cat-icon">&#9654;</div>
+          <span>Blog & Media</span>
+          <small>2</small>
+        </button>
+        <button class="cat-card" data-filter="startup">
+          <div class="cat-icon">&#9668;</div>
+          <span>Startup</span>
+          <small>2</small>
+        </button>
+        <button class="cat-card" data-filter="digital-art">
+          <div class="cat-icon">&#9670;</div>
+          <span>Digital Art</span>
+          <small>3</small>
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TEMPLATES GRID -->
+  <section class="section section-alt" id="templates">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured Templates</h2>
+        <p>Hand-picked templates loved by thousands of developers and designers</p>
+      </div>
+
+      <div class="filter-bar">
+        <div class="search-wrap">
+          <svg class="search-icon" viewBox="0 0 20 20" fill="none"><circle cx="8.5" cy="8.5" r="5.75" stroke="currentColor" stroke-width="1.5"/><path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <input type="text" id="searchInput" placeholder="Search templates..." class="search-input" />
+        </div>
+        <div class="sort-wrap">
+          <select id="sortSelect" class="sort-select">
+            <option value="popular">Most Popular</option>
+            <option value="newest">Newest</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="templates-grid" id="templatesGrid">
+        <!-- Cards injected by JS -->
+      </div>
+
+      <div class="load-more-wrap">
+        <button class="btn btn-outline btn-lg" id="loadMoreBtn">Load More Templates</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Everything You Need to Ship Fast</h2>
+        <p>Every template is built with the tools modern teams rely on</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-blue">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Fully Responsive</h3>
+          <p>Every template looks stunning on desktop, tablet, and mobile — tested across all modern browsers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-purple">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Clean Code</h3>
+          <p>Well-structured HTML, CSS, and JS with clear comments. Easy to customize without digging through spaghetti.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-green">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Lightning Fast</h3>
+          <p>Optimized assets, minimal dependencies, and 90+ Lighthouse scores out of the box.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-orange">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Free Lifetime Updates</h3>
+          <p>Buy once and get all future updates to that template at no extra cost — forever.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-pink">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Commercial License</h3>
+          <p>Use templates for client projects and commercial work. One license per project, no royalties ever.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon feature-icon-teal">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Priority Support</h3>
+          <p>Get answers from our team within 24 hours. Pro members get dedicated support and live chat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="section section-alt" id="pricing">
+    <div class="container">
+      <div class="section-header">
+        <h2>Simple, Transparent Pricing</h2>
+        <p>Get more value with a membership, or buy individual templates a la carte</p>
+      </div>
+      <div class="pricing-toggle">
+        <button class="toggle-btn active" data-plan="monthly">Monthly</button>
+        <button class="toggle-btn" data-plan="yearly">Yearly <span class="badge-save">Save 40%</span></button>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-label">Starter</div>
+          <div class="pricing-price"><span class="currency">$</span><span class="amount" data-monthly="0" data-yearly="0">0</span></div>
+          <div class="pricing-period">forever free</div>
+          <ul class="pricing-features">
+            <li><span class="check">&#10003;</span> 5 free templates</li>
+            <li><span class="check">&#10003;</span> Community support</li>
+            <li><span class="check">&#10003;</span> Basic license</li>
+            <li class="disabled"><span class="cross">&#10007;</span> Premium templates</li>
+            <li class="disabled"><span class="cross">&#10007;</span> Priority support</li>
+            <li class="disabled"><span class="cross">&#10007;</span> Commercial license</li>
+          </ul>
+          <a href="#" class="btn btn-outline btn-full">Get Started Free</a>
+        </div>
+        <div class="pricing-card pricing-card-featured">
+          <div class="pricing-popular">Most Popular</div>
+          <div class="pricing-label">Pro</div>
+          <div class="pricing-price"><span class="currency">$</span><span class="amount" data-monthly="29" data-yearly="17">29</span></div>
+          <div class="pricing-period monthly-label">per month</div>
+          <ul class="pricing-features">
+            <li><span class="check">&#10003;</span> All 200+ templates</li>
+            <li><span class="check">&#10003;</span> Priority support (24h)</li>
+            <li><span class="check">&#10003;</span> Commercial license</li>
+            <li><span class="check">&#10003;</span> Lifetime updates</li>
+            <li><span class="check">&#10003;</span> Figma source files</li>
+            <li class="disabled"><span class="cross">&#10007;</span> White-label rights</li>
+          </ul>
+          <a href="#" class="btn btn-primary btn-full">Start Pro Trial</a>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-label">Agency</div>
+          <div class="pricing-price"><span class="currency">$</span><span class="amount" data-monthly="79" data-yearly="47">79</span></div>
+          <div class="pricing-period monthly-label">per month</div>
+          <ul class="pricing-features">
+            <li><span class="check">&#10003;</span> Everything in Pro</li>
+            <li><span class="check">&#10003;</span> White-label rights</li>
+            <li><span class="check">&#10003;</span> Up to 10 team seats</li>
+            <li><span class="check">&#10003;</span> Dedicated account manager</li>
+            <li><span class="check">&#10003;</span> Custom template requests</li>
+            <li><span class="check">&#10003;</span> Live chat support</li>
+          </ul>
+          <a href="#" class="btn btn-outline btn-full">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" id="testimonials">
+    <div class="container">
+      <div class="section-header">
+        <h2>Loved by Thousands</h2>
+        <p>Don't take our word for it — here's what our customers say</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"I launched my SaaS landing page in an afternoon. The code is so clean I barely had to change anything. Worth every penny."</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:#6366f1;">JL</div>
+            <div>
+              <strong>Jordan Lee</strong>
+              <span>Founder, Listify</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card testimonial-featured">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"We've been using TemplateForge for all our client projects. The agency plan pays for itself with the first project. Quality is unmatched."</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:#8b5cf6;">SR</div>
+            <div>
+              <strong>Sofia Reyes</strong>
+              <span>Creative Director, Pixel & Co.</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"The Figma source files are a lifesaver. Our design team can iterate, hand off to devs, and ship in days instead of weeks."</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:#10b981;">MC</div>
+            <div>
+              <strong>Marcus Chen</strong>
+              <span>Lead Designer, Waverly Inc.</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Support team fixed my customization issue within 2 hours. That kind of service makes you a customer for life."</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:#f59e0b;">AP</div>
+            <div>
+              <strong>Aisha Patel</strong>
+              <span>Freelance Developer</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"Finally templates that don't look like they're from 2015. Modern design, modern code — exactly what my clients expect."</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:#ef4444;">TN</div>
+            <div>
+              <strong>Tyler Nguyen</strong>
+              <span>Web Agency Owner</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>"As a non-coder, I was nervous. The documentation is so thorough that even I could customize the template. Incredible experience."</p>
+          <div class="testimonial-author">
+            <div class="avatar" style="background:#06b6d4;">BW</div>
+            <div>
+              <strong>Blake Wilson</strong>
+              <span>Small Business Owner</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Ready to Build Something Great?</h2>
+      <p>Join 12,000+ customers who ship faster with TemplateForge.</p>
+      <div class="cta-actions">
+        <a href="#templates" class="btn btn-white btn-lg">Browse Templates</a>
+        <a href="#pricing" class="btn btn-outline-white btn-lg">View Pricing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">Template<span>Forge</span></a>
+          <p>Professional website templates for every business, built by designers who care about quality.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Twitter">&#120143;</a>
+            <a href="#" aria-label="GitHub">&#9775;</a>
+            <a href="#" aria-label="Instagram">&#9632;</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Templates</h4>
+          <ul>
+            <li><a href="#">SaaS Templates</a></li>
+            <li><a href="#">Portfolio Templates</a></li>
+            <li><a href="#">E-Commerce Templates</a></li>
+            <li><a href="#">Agency Templates</a></li>
+            <li><a href="#">Blog Templates</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Affiliate Program</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">License Info</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 TemplateForge. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-preview" id="modalPreview"></div>
+      <div class="modal-info" id="modalInfo"></div>
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <!-- CART VIEW -->
+    <div class="cart-view" id="cartView">
+      <div class="cart-header">
+        <h2 class="cart-title">Your Cart</h2>
+        <button class="cart-close" id="cartClose">&times;</button>
+      </div>
+      <div class="cart-body" id="cartBody">
+        <!-- items injected by JS -->
+      </div>
+      <div class="cart-footer" id="cartFooter" style="display:none;">
+        <div class="cart-summary">
+          <div class="cart-summary-row"><span>Subtotal</span><span id="cartSubtotal">$0</span></div>
+          <div class="cart-summary-row cart-summary-total"><span>Total</span><span id="cartTotal">$0</span></div>
+        </div>
+        <button class="btn btn-primary btn-full" id="checkoutBtn">Checkout →</button>
+        <p class="cart-secure">🔒 Secure checkout · Instant download after payment</p>
+      </div>
+    </div>
+    <!-- CHECKOUT VIEW -->
+    <div class="cart-view" id="checkoutView" style="display:none;">
+      <div class="cart-header">
+        <button class="cart-back" id="cartBack">← Back</button>
+        <h2 class="cart-title">Checkout</h2>
+        <button class="cart-close" id="checkoutClose">&times;</button>
+      </div>
+      <div class="cart-body">
+        <div class="checkout-order-summary" id="checkoutSummary"></div>
+        <form class="checkout-form" id="checkoutForm" novalidate>
+          <div class="checkout-section-label">Contact</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" name="firstName" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" name="lastName" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="john@example.com" required />
+          </div>
+          <div class="checkout-section-label" style="margin-top:20px;">Payment</div>
+          <div id="payment-element-wrap">
+            <div id="payment-element"></div>
+            <div id="payment-element-loader" class="stripe-loader">
+              <span class="stripe-loader-dot"></span>
+              <span class="stripe-loader-dot"></span>
+              <span class="stripe-loader-dot"></span>
+            </div>
+          </div>
+          <div id="payment-errors" class="payment-error-msg"></div>
+          <div class="checkout-total-row">
+            <span>Total due</span>
+            <strong id="checkoutTotalDue">$0</strong>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" id="placeOrderBtn">Complete Purchase</button>
+          <p class="cart-secure" style="margin-top:12px;">🔒 256-bit SSL encryption · Your data is safe</p>
+        </form>
+      </div>
+    </div>
+    <!-- SUCCESS VIEW -->
+    <div class="cart-view" id="successView" style="display:none;">
+      <div class="cart-header">
+        <h2 class="cart-title">Order Confirmed</h2>
+        <button class="cart-close" id="successClose">&times;</button>
+      </div>
+      <div class="cart-body success-body">
+        <div class="success-icon">✓</div>
+        <h3 class="success-title">Thank you!</h3>
+        <p class="success-msg">Your order has been placed. Download links have been sent to your email.</p>
+        <div class="success-items" id="successItems"></div>
+        <button class="btn btn-primary btn-full" id="continueShopping">Continue Shopping</button>
+      </div>
+    </div>
+  </aside>
+
+  <script src="js/main.js?v=4"></script>
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kinetic — Motion & 3D Designer Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #050507;
+      --bg2: #0c0c14;
+      --text: #f0eeff;
+      --muted: rgba(240,238,255,0.4);
+      --c1: #ff2d78;
+      --c2: #7000ff;
+      --c3: #00e5ff;
+      --c4: #ffb800;
+      --border: rgba(255,255,255,0.06);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Space Grotesk', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1000;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 52px; height: 64px;
+    }
+    .nav-logo { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; }
+    .nav-logo span { background: linear-gradient(90deg, var(--c1), var(--c2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-links { display: flex; gap: 32px; background: rgba(5,5,7,0.6); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 100px; padding: 0 24px; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); padding: 12px 0; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-hire { padding: 10px 20px; border-radius: 100px; font-size: 13px; font-weight: 700; background: linear-gradient(135deg, var(--c1), var(--c2)); color: #fff; transition: all 0.2s; }
+    .nav-hire:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(112,0,255,0.4); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 100px 48px 80px; text-align: center; position: relative; overflow: hidden;
+    }
+    /* Animated gradient orbs */
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none;
+    }
+    .orb-1 { width: 500px; height: 500px; background: radial-gradient(var(--c1), transparent 70%); top: 10%; left: 20%; opacity: 0.2; animation: orb1 12s ease-in-out infinite; }
+    .orb-2 { width: 500px; height: 500px; background: radial-gradient(var(--c2), transparent 70%); bottom: 10%; right: 15%; opacity: 0.2; animation: orb2 10s ease-in-out infinite; }
+    .orb-3 { width: 300px; height: 300px; background: radial-gradient(var(--c3), transparent 70%); top: 60%; left: 10%; opacity: 0.15; animation: orb3 8s ease-in-out infinite; }
+    @keyframes orb1 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(60px,-40px)} 66%{transform:translate(-40px,30px)} }
+    @keyframes orb2 { 0%,100%{transform:translate(0,0)} 33%{transform:translate(-50px,40px)} 66%{transform:translate(40px,-30px)} }
+    @keyframes orb3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-20px)} }
+
+    /* Floating shapes */
+    .shape3d {
+      position: absolute; pointer-events: none;
+      font-size: clamp(40px, 6vw, 80px); opacity: 0.15;
+    }
+    .s1 { top: 15%; left: 8%; animation: float3d 7s ease-in-out infinite; }
+    .s2 { top: 20%; right: 10%; animation: float3d 9s ease-in-out infinite 1s; }
+    .s3 { bottom: 25%; left: 12%; animation: float3d 8s ease-in-out infinite 2s; }
+    .s4 { bottom: 20%; right: 8%; animation: float3d 11s ease-in-out infinite 0.5s; }
+    @keyframes float3d { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-20px) rotate(10deg)} }
+
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 28px;
+      font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
+    }
+    .hero-tag-line { width: 32px; height: 1px; background: linear-gradient(90deg, var(--c1), var(--c2)); }
+    .hero-title {
+      font-size: clamp(48px, 9vw, 116px); font-weight: 700; line-height: 0.95;
+      letter-spacing: -3px; margin-bottom: 24px; position: relative;
+    }
+    .word-1 { display: block; }
+    .word-2 { display: block; background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .word-3 { display: block; }
+    .hero-desc { font-size: 18px; color: var(--muted); max-width: 520px; line-height: 1.7; margin-bottom: 40px; }
+    .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-gradient {
+      padding: 16px 32px; border-radius: 100px;
+      background: linear-gradient(135deg, var(--c1), var(--c2));
+      color: #fff; font-size: 15px; font-weight: 700; transition: all 0.3s; display: inline-block;
+    }
+    .btn-gradient:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(112,0,255,0.5); }
+    .btn-glass {
+      padding: 16px 32px; border-radius: 100px;
+      background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      color: var(--text); font-size: 15px; font-weight: 600; transition: all 0.2s; display: inline-block;
+      backdrop-filter: blur(8px);
+    }
+    .btn-glass:hover { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.1); }
+
+    /* REEL */
+    .reel-section { padding: 60px 0; }
+    .reel-label { text-align: center; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+    .reel-track {
+      display: flex; gap: 16px; overflow-x: auto; padding: 0 48px;
+      scrollbar-width: none;
+    }
+    .reel-track::-webkit-scrollbar { display: none; }
+    .reel-item {
+      flex-shrink: 0; width: 280px; aspect-ratio: 16/9; border-radius: 12px;
+      overflow: hidden; position: relative; cursor: pointer;
+      border: 1px solid var(--border); transition: all 0.3s;
+    }
+    .reel-item:hover { transform: scale(1.03); border-color: rgba(255,255,255,0.15); }
+    .reel-thumb {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-size: 40px; transition: transform 0.5s;
+    }
+    .reel-item:hover .reel-thumb { transform: scale(1.1); }
+    .reel-play {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s; background: rgba(0,0,0,0.3);
+    }
+    .reel-item:hover .reel-play { opacity: 1; }
+    .play-icon { width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+    .reel-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 14px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
+    .reel-info h4 { font-size: 13px; font-weight: 700; }
+    .reel-info p { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    /* WORK GRID */
+    .section { padding: 96px 48px; }
+    .section-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 48px; }
+    .section-title { font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: -1.5px; }
+    .section-link { font-size: 13px; font-weight: 600; color: var(--c3); }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .proj-card {
+      border-radius: 20px; overflow: hidden; cursor: pointer;
+      position: relative; border: 1px solid var(--border); transition: all 0.3s;
+    }
+    .proj-card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-4px); }
+    .proj-card:nth-child(1) { grid-row: span 2; }
+    .proj-thumb {
+      width: 100%; height: 100%; min-height: 220px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(48px, 8vw, 80px); position: relative;
+    }
+    .proj-overlay {
+      position: absolute; inset: 0; padding: 24px;
+      background: linear-gradient(to top, rgba(5,5,7,0.95) 0%, transparent 70%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .proj-tag { font-size: 10px; padding: 3px 8px; border-radius: 100px; font-weight: 700; }
+    .tag-pink { background: rgba(255,45,120,0.2); color: var(--c1); border: 1px solid rgba(255,45,120,0.2); }
+    .tag-purple { background: rgba(112,0,255,0.2); color: #a78bfa; border: 1px solid rgba(112,0,255,0.2); }
+    .tag-cyan { background: rgba(0,229,255,0.15); color: var(--c3); border: 1px solid rgba(0,229,255,0.15); }
+    .proj-name { font-size: 20px; font-weight: 700; }
+    .proj-client { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+    /* SKILLS */
+    .skills-section { background: var(--bg2); padding: 96px 48px; }
+    .skills-inner { max-width: 1100px; margin: 0 auto; }
+    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 48px; }
+    .skill-category h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 20px; }
+    .skill-bars { display: flex; flex-direction: column; gap: 14px; }
+    .skill-bar-item { display: flex; flex-direction: column; gap: 6px; }
+    .skill-bar-header { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; }
+    .skill-bar-header span:last-child { color: var(--muted); }
+    .skill-bar-track { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+    .skill-bar-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+    .fill-pink { background: linear-gradient(90deg, var(--c1), var(--c2)); }
+    .fill-cyan { background: linear-gradient(90deg, var(--c2), var(--c3)); }
+    .fill-gold { background: linear-gradient(90deg, var(--c2), var(--c4)); }
+
+    /* CONTACT */
+    .contact-section {
+      padding: 120px 48px; text-align: center; position: relative; overflow: hidden;
+    }
+    .contact-orb { position: absolute; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); top: 50%; left: 50%; transform: translate(-50%,-50%); background: radial-gradient(var(--c2), transparent 60%); opacity: 0.15; pointer-events: none; }
+    .contact-section h2 { font-size: clamp(36px, 6vw, 80px); font-weight: 700; letter-spacing: -2px; margin-bottom: 16px; position: relative; }
+    .contact-section h2 .grad { background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .contact-section p { font-size: 18px; color: var(--muted); margin-bottom: 40px; position: relative; }
+    .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; position: relative; }
+    .contact-chip {
+      padding: 12px 24px; border-radius: 100px; border: 1px solid var(--border);
+      font-size: 14px; font-weight: 600; color: var(--muted); transition: all 0.2s;
+      background: rgba(255,255,255,0.03); backdrop-filter: blur(8px);
+    }
+    .contact-chip:hover { border-color: rgba(255,255,255,0.15); color: var(--text); background: rgba(255,255,255,0.07); }
+
+    footer { padding: 28px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+
+    /* TEMPLATE BANNER */
+    .template-banner {
+      position: fixed; bottom: 20px; right: 20px; z-index: 999;
+      background: var(--bg2); border: 1px solid rgba(112,0,255,0.3);
+      border-radius: 12px; padding: 14px 20px;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    }
+    .template-banner p { font-size: 13px; color: var(--muted); }
+    .template-banner strong { color: var(--text); }
+    .banner-btn { padding: 8px 16px; background: linear-gradient(135deg, var(--c1), var(--c2)); color: #fff; font-size: 13px; font-weight: 700; border-radius: 6px; white-space: nowrap; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 20px 60px; }
+      .section { padding: 64px 20px; }
+      .skills-section { padding: 64px 20px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .proj-card:nth-child(1) { grid-row: span 1; }
+      .contact-section { padding: 64px 20px; }
+      .reel-track { padding: 0 20px; }
+      footer { padding: 24px 20px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">ZEN<span>.</span></div>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-hire">Hire Me</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="shape3d s1">◈</div>
+    <div class="shape3d s2">⬡</div>
+    <div class="shape3d s3">◉</div>
+    <div class="shape3d s4">⬟</div>
+    <div class="hero-tag"><div class="hero-tag-line"></div>Motion · 3D · Creative Direction<div class="hero-tag-line"></div></div>
+    <h1 class="hero-title">
+      <span class="word-1">I make</span>
+      <span class="word-2">motion</span>
+      <span class="word-3">mean things.</span>
+    </h1>
+    <p class="hero-desc">Award-winning motion designer and 3D artist. I craft animations and visuals that stop thumbs, drive clicks, and make brands unforgettable.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn-gradient">Watch My Reel</a>
+      <a href="#contact" class="btn-glass">Start a Project</a>
+    </div>
+  </section>
+
+  <!-- REEL -->
+  <section class="reel-section">
+    <div class="reel-label">Selected Motion Work</div>
+    <div class="reel-track">
+      <div class="reel-item">
+        <div class="reel-thumb" style="background:linear-gradient(135deg,#1a0020,#4d0080);">✦</div>
+        <div class="reel-play"><div class="play-icon">▶</div></div>
+        <div class="reel-info"><h4>Pulse Brand Film</h4><p>3D · After Effects</p></div>
+      </div>
+      <div class="reel-item">
+        <div class="reel-thumb" style="background:linear-gradient(135deg,#001a2e,#004d7a);">◈</div>
+        <div class="reel-play"><div class="play-icon">▶</div></div>
+        <div class="reel-info"><h4>Arc Product Launch</h4><p>Cinema 4D · Motion</p></div>
+      </div>
+      <div class="reel-item">
+        <div class="reel-thumb" style="background:linear-gradient(135deg,#1a0010,#7a0040);">◉</div>
+        <div class="reel-play"><div class="play-icon">▶</div></div>
+        <div class="reel-info"><h4>Waverly Title Sequence</h4><p>Blender · Compositing</p></div>
+      </div>
+      <div class="reel-item">
+        <div class="reel-thumb" style="background:linear-gradient(135deg,#001a1a,#004d4d);">⬡</div>
+        <div class="reel-play"><div class="play-icon">▶</div></div>
+        <div class="reel-info"><h4>Prism Social Pack</h4><p>After Effects · Design</p></div>
+      </div>
+      <div class="reel-item">
+        <div class="reel-thumb" style="background:linear-gradient(135deg,#1a1000,#4d3000);">⬟</div>
+        <div class="reel-play"><div class="play-icon">▶</div></div>
+        <div class="reel-info"><h4>Nova App Onboarding</h4><p>Lottie · Rive · Figma</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="work" style="max-width:1200px;margin:0 auto;">
+    <div class="section-header">
+      <h2 class="section-title">Case Studies</h2>
+      <a href="#" class="section-link">All Work →</a>
+    </div>
+    <div class="projects-grid">
+      <div class="proj-card">
+        <div class="proj-thumb" style="background:linear-gradient(160deg,#1a0020,#7000ff,#ff2d78);min-height:480px;">◈</div>
+        <div class="proj-overlay">
+          <div class="proj-tags"><span class="proj-tag tag-pink">3D</span><span class="proj-tag tag-purple">Branding</span><span class="proj-tag tag-cyan">Motion</span></div>
+          <div class="proj-name">Prism Identity System</div>
+          <div class="proj-client">Prism Health · 2025</div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb" style="background:linear-gradient(160deg,#001a3a,#0070ff);">✦</div>
+        <div class="proj-overlay">
+          <div class="proj-tags"><span class="proj-tag tag-cyan">Title Seq.</span></div>
+          <div class="proj-name">Arc TV Title Sequence</div>
+          <div class="proj-client">Arc Studios · 2025</div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-thumb" style="background:linear-gradient(160deg,#1a0a00,#ff6600);">⬡</div>
+        <div class="proj-overlay">
+          <div class="proj-tags"><span class="proj-tag tag-pink">Lottie</span><span class="proj-tag tag-purple">UI Motion</span></div>
+          <div class="proj-name">Ember App Animations</div>
+          <div class="proj-client">Ember Inc. · 2024</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills-section" id="skills">
+    <div class="skills-inner">
+      <h2 style="font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-1.5px;margin-bottom:12px;">Tools & Skills</h2>
+      <p style="color:var(--muted);font-size:16px;">Specialist in motion, 3D, and interaction design — from concept to delivery.</p>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Motion & 3D</h3>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>After Effects</span><span>Expert</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill fill-pink" style="width:97%;"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Cinema 4D</span><span>Expert</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill fill-pink" style="width:93%;"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Blender</span><span>Advanced</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill fill-pink" style="width:85%;"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Houdini</span><span>Intermediate</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill fill-pink" style="width:65%;"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h3>Design & Code</h3>
+          <div class="skill-bars">
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Figma</span><span>Expert</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill fill-cyan" style="width:95%;"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Lottie / Rive</span><span>Expert</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill fill-cyan" style="width:92%;"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>GSAP / WebGL</span><span>Advanced</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill fill-cyan" style="width:80%;"></div></div>
+            </div>
+            <div class="skill-bar-item">
+              <div class="skill-bar-header"><span>Unreal Engine</span><span>Intermediate</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill fill-cyan" style="width:60%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-orb"></div>
+    <h2>Let's make<br/>something <span class="grad">unforgettable.</span></h2>
+    <p>Open for freelance projects, brand collaborations, and full-time roles.</p>
+    <div class="contact-links">
+      <a href="#" class="contact-chip">✉ zen@motion.studio</a>
+      <a href="#" class="contact-chip">Behance</a>
+      <a href="#" class="contact-chip">Dribbble</a>
+      <a href="#" class="contact-chip">Instagram</a>
+      <a href="#" class="contact-chip">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Zen Motion Studio</span>
+    <span>Berlin · Remote Worldwide</span>
+  </footer>
+
+  <div class="template-banner">
+    <div>
+      <p><strong>Kinetic</strong> — Motion & 3D Designer Portfolio</p>
+      <p>by TemplateForge</p>
+    </div>
+    <a href="../../index.html#templates" class="banner-btn">Get This Template →</a>
+  </div>
+
+</body>
+</html>

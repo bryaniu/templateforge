@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Nova — Design & Branding Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#fffef9;--dark:#111008;--teal:#0d9488;--muted:#6b6850;--border:#e8e4d4;--card:#f5f2e8}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}a{color:inherit;text-decoration:none}
+    nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:68px;background:rgba(255,254,249,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .logo{font-family:'Fraunces',serif;font-size:22px;font-weight:700;letter-spacing:-.5px}.logo em{font-style:italic;color:var(--teal)}
+    .nav-links{display:flex;gap:32px}.nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}.nav-links a:hover{color:var(--dark)}
+    .nav-cta{padding:10px 22px;border:1.5px solid var(--dark);color:var(--dark);font-size:13px;font-weight:600;border-radius:100px;transition:all .2s}.nav-cta:hover{background:var(--dark);color:#fff}
+    /* HERO */
+    .hero{padding:100px 52px 80px;max-width:1300px;margin:0 auto}
+    .hero-title{font-family:'Fraunces',serif;font-size:clamp(56px,8vw,110px);font-weight:100;line-height:1;letter-spacing:-3px;margin-bottom:40px}
+    .hero-title em{font-style:italic;color:var(--teal)}
+    .hero-bottom{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:flex-end}
+    .hero-desc{font-size:17px;color:var(--muted);line-height:1.75;max-width:440px;margin-bottom:28px}
+    .hero-cta-row{display:flex;gap:12px;align-items:center}
+    .btn-dark{padding:14px 28px;background:var(--dark);color:#fff;font-size:14px;font-weight:600;border-radius:100px;transition:all .2s;display:inline-block}.btn-dark:hover{background:#222;transform:translateY(-1px)}
+    .btn-teal{padding:14px 28px;border:1.5px solid var(--border);color:var(--dark);font-size:14px;font-weight:600;border-radius:100px;transition:all .2s;display:inline-block}.btn-teal:hover{border-color:var(--teal);color:var(--teal)}
+    .hero-stats-row{display:flex;gap:40px;justify-content:flex-end;padding-bottom:8px}
+    .hs strong{font-family:'Fraunces',serif;font-size:40px;font-weight:100;display:block;letter-spacing:-1px}
+    .hs span{font-size:13px;color:var(--muted)}
+    /* WORK BENTO */
+    .bento{padding:80px 52px;background:var(--card)}
+    .bento-inner{max-width:1300px;margin:0 auto}
+    .bento-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:16px;margin-top:48px}
+    .bento-item{border-radius:20px;overflow:hidden;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;font-size:56px;transition:transform .3s}
+    .bento-item:hover{transform:scale(1.02)}
+    .bento-item:first-child{grid-column:span 2;aspect-ratio:2/1;font-size:80px}
+    .bento-item:not(:first-child){aspect-ratio:1}
+    .bento-label{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent)}
+    .bento-title{font-family:'Fraunces',serif;font-size:20px;font-weight:400;color:#fff}
+    .bento-cat{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:4px}
+    /* TEAM */
+    .team{padding:96px 52px;max-width:1200px;margin:0 auto}
+    .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+    .team-card{text-align:center}
+    .team-avatar{width:100%;aspect-ratio:1;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:56px;margin-bottom:16px}
+    .team-name{font-family:'Fraunces',serif;font-size:20px;font-weight:400;margin-bottom:4px}
+    .team-role{font-size:13px;color:var(--muted)}
+    /* CONTACT */
+    .contact-banner{background:var(--dark);padding:96px 52px;text-align:center}
+    .contact-banner h2{font-family:'Fraunces',serif;font-size:clamp(40px,6vw,80px);font-weight:100;letter-spacing:-2px;color:#fff;margin-bottom:16px}
+    .contact-banner h2 em{font-style:italic;color:var(--teal)}
+    .contact-banner p{color:rgba(255,255,255,.4);font-size:17px;margin-bottom:32px}
+    footer{padding:28px 52px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+    .template-banner{position:fixed;bottom:20px;right:20px;z-index:999;background:var(--dark);border:1px solid rgba(13,148,136,.35);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+    .template-banner p{font-size:13px;color:rgba(255,255,255,.4)}.template-banner strong{color:#fff}
+    .banner-btn{padding:8px 16px;background:var(--teal);color:#fff;font-size:13px;font-weight:700;border-radius:6px;white-space:nowrap}
+    @media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.hero{padding:80px 20px 48px}.hero-bottom{grid-template-columns:1fr;gap:24px}.hero-stats-row{justify-content:flex-start}.bento{padding:64px 20px}.bento-grid{grid-template-columns:1fr}.bento-item:first-child{grid-column:span 1;aspect-ratio:4/3}.team{padding:64px 20px}.team-grid{grid-template-columns:1fr}.contact-banner{padding:64px 20px}footer{padding:20px;flex-direction:column;gap:8px}}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Nova <em>Studio</em></div>
+    <div class="nav-links"><a href="#">Work</a><a href="#">Services</a><a href="#">Studio</a><a href="#">Journal</a></div>
+    <a href="#" class="nav-cta">Let's Talk</a>
+  </nav>
+  <section class="hero">
+    <h1 class="hero-title">Design that<br/><em>moves</em><br/>people.</h1>
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-desc">A boutique branding and design studio crafting identities, websites, and campaigns for brands that want to be remembered.</p>
+        <div class="hero-cta-row"><a href="#" class="btn-dark">See Our Work</a><a href="#" class="btn-teal">Studio Story</a></div>
+      </div>
+      <div class="hero-stats-row">
+        <div class="hs"><strong>80+</strong><span>Brands created</span></div>
+        <div class="hs"><strong>8yr</strong><span>In practice</span></div>
+        <div class="hs"><strong>4</strong><span>Continents served</span></div>
+      </div>
+    </div>
+  </section>
+  <section class="bento">
+    <div class="bento-inner">
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(28px,4vw,48px);font-weight:100;letter-spacing:-1px">Selected Projects</h2>
+      <div class="bento-grid">
+        <div class="bento-item" style="background:linear-gradient(135deg,#0d1a0d,#1a3d1a)">🌿<div class="bento-label"><div class="bento-title">Grove Organic — Brand System</div><div class="bento-cat">Identity · Packaging</div></div></div>
+        <div class="bento-item" style="background:linear-gradient(135deg,#0d0d1a,#1a1a3d)">✦<div class="bento-label"><div class="bento-title">Arc Platform</div><div class="bento-cat">Web Design</div></div></div>
+        <div class="bento-item" style="background:linear-gradient(135deg,#1a0d0d,#3d1a1a)">◈<div class="bento-label"><div class="bento-title">Ember Campaign</div><div class="bento-cat">Art Direction</div></div></div>
+        <div class="bento-item" style="background:linear-gradient(135deg,#0d1a1a,#1a3d3d)">◉<div class="bento-label"><div class="bento-title">Prism Identity</div><div class="bento-cat">Branding</div></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="team">
+    <h2 style="font-family:'Fraunces',serif;font-size:clamp(28px,4vw,48px);font-weight:100;letter-spacing:-1px;margin-bottom:12px">The Studio</h2>
+    <p style="color:var(--muted);font-size:16px">Three disciplines, one shared obsession with craft.</p>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#d4e8d8,#b8d4c0)">👩‍🎨</div><div class="team-name">Clara Moon</div><div class="team-role">Creative Director</div></div>
+      <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#d4d4e8,#b8b8d4)">👨‍💻</div><div class="team-name">James Park</div><div class="team-role">Lead Developer</div></div>
+      <div class="team-card"><div class="team-avatar" style="background:linear-gradient(135deg,#e8d4d4,#d4b8b8)">👩‍💼</div><div class="team-name">Amara Diallo</div><div class="team-role">Brand Strategist</div></div>
+    </div>
+  </section>
+  <section class="contact-banner">
+    <h2>Ready to make something<br/><em>remarkable</em>?</h2>
+    <p>We take on 4 new projects per quarter. Spots fill fast.</p>
+    <a href="#" class="btn-teal" style="display:inline-block;padding:14px 32px;border-radius:100px;font-size:15px;font-weight:700">Enquire Now →</a>
+  </section>
+  <footer><span>© 2026 Nova Studio</span><span>London · Remote</span></footer>
+  <div class="template-banner"><div><p><strong>Nova</strong> — Design Studio Template</p><p>by TemplateForge</p></div><a href="../../index.html#templates" class="banner-btn">Get This Template →</a></div>
+</body>
+</html>

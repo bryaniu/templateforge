@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Prism — Abstract Digital Art Pack</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#060608;--bg2:#0e0e14;--text:#f0eeff;--muted:rgba(240,238,255,.45);--c1:#ff006e;--c2:#8338ec;--c3:#3a86ff;--c4:#06ffd4;--border:rgba(255,255,255,.07)}
+    body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}a{color:inherit;text-decoration:none}
+    nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:64px;background:rgba(6,6,8,.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+    .logo{font-size:20px;font-weight:700;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .nav-links{display:flex;gap:28px}.nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}.nav-links a:hover{color:var(--text)}
+    .nav-cta{padding:9px 20px;background:linear-gradient(135deg,var(--c2),var(--c1));color:#fff;font-size:14px;font-weight:700;border-radius:8px;transition:all .2s}.nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(131,56,236,.4)}
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:100px 48px 60px;position:relative;overflow:hidden}
+    .orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+    .o1{width:400px;height:400px;background:var(--c2);opacity:.12;top:10%;left:10%;animation:float 9s ease-in-out infinite}
+    .o2{width:350px;height:350px;background:var(--c1);opacity:.1;bottom:10%;right:10%;animation:float 11s ease-in-out infinite reverse}
+    .o3{width:250px;height:250px;background:var(--c3);opacity:.1;top:50%;left:50%;transform:translate(-50%,-50%);animation:float 7s ease-in-out infinite 1s}
+    @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+    .hero-label{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--c4);margin-bottom:20px}
+    .hero-title{font-size:clamp(48px,8vw,100px);font-weight:700;letter-spacing:-3px;line-height:.95;margin-bottom:20px}
+    .hero-title .grad{background:linear-gradient(135deg,var(--c1),var(--c2),var(--c3),var(--c4));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-desc{font-size:18px;color:var(--muted);max-width:540px;line-height:1.7;margin-bottom:36px}
+    .hero-stats{display:flex;gap:48px;justify-content:center;margin-top:48px;flex-wrap:wrap}
+    .hs strong{font-size:36px;font-weight:700;background:linear-gradient(135deg,var(--c2),var(--c3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+    .hs span{font-size:13px;color:var(--muted)}
+    /* GALLERY */
+    .gallery{padding:80px 0;overflow:hidden}
+    .gallery-label{text-align:center;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:32px}
+    .gallery-track{display:flex;gap:16px;padding:0 52px;overflow-x:auto;scrollbar-width:none}
+    .gallery-track::-webkit-scrollbar{display:none}
+    .art-card{flex-shrink:0;width:240px;border-radius:16px;overflow:hidden;cursor:pointer;position:relative;border:1px solid var(--border);transition:all .3s}
+    .art-card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.15)}
+    .art-thumb{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:56px}
+    .art-info{padding:14px}
+    .art-title{font-size:14px;font-weight:700;margin-bottom:4px}
+    .art-meta{font-size:12px;color:var(--muted);display:flex;align-items:center;justify-content:space-between}
+    .art-price{color:var(--c4);font-weight:700}
+    .art-format{background:rgba(255,255,255,.06);padding:2px 8px;border-radius:4px;font-size:10px}
+    /* COLLECTIONS */
+    .collections{padding:80px 52px;max-width:1200px;margin:0 auto}
+    .section-title{font-size:clamp(28px,4vw,44px);font-weight:700;letter-spacing:-1.5px;margin-bottom:8px}
+    .section-sub{color:var(--muted);font-size:16px;margin-bottom:48px}
+    .col-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .col-item{border-radius:20px;overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:all .3s;position:relative}
+    .col-item:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.15)}
+    .col-thumb{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:64px}
+    .col-body{padding:20px}
+    .col-name{font-size:18px;font-weight:700;margin-bottom:4px}
+    .col-count{font-size:13px;color:var(--muted);margin-bottom:12px}
+    .col-tags{display:flex;gap:6px;flex-wrap:wrap}
+    .col-tag{font-size:11px;padding:3px 8px;border-radius:4px;border:1px solid var(--border);color:var(--muted)}
+    /* LICENSE */
+    .license{padding:80px 52px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .license-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .lic-card{border-radius:16px;padding:28px;border:1px solid var(--border)}
+    .lic-card-featured{border-color:var(--c2);background:linear-gradient(135deg,rgba(131,56,236,.08),transparent)}
+    .lic-name{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:12px}
+    .lic-price{font-size:40px;font-weight:700;letter-spacing:-1.5px;margin-bottom:6px}
+    .lic-period{font-size:13px;color:var(--muted);margin-bottom:20px}
+    .lic-features{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+    .lic-features li{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:8px;list-style:none}
+    .check{color:var(--c4)}
+    .lic-btn{width:100%;padding:12px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;border:none;transition:all .2s}
+    .lic-btn-primary{background:linear-gradient(135deg,var(--c2),var(--c1));color:#fff}
+    .lic-btn-outline{background:transparent;border:1.5px solid var(--border)!important;color:var(--text)}.lic-btn-outline:hover{border-color:var(--c2)!important}
+    footer{padding:28px 52px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+    .template-banner{position:fixed;bottom:20px;right:20px;z-index:999;background:var(--bg2);border:1px solid rgba(131,56,236,.3);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
+    .template-banner p{font-size:13px;color:var(--muted)}.template-banner strong{color:var(--text)}
+    .banner-btn{padding:8px 16px;background:linear-gradient(135deg,var(--c2),var(--c1));color:#fff;font-size:13px;font-weight:700;border-radius:6px;white-space:nowrap}
+    @media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.hero{padding:80px 20px 48px}.gallery{padding:48px 0}.gallery-track{padding:0 20px}.collections{padding:56px 20px}.col-grid{grid-template-columns:1fr}.license{padding:56px 20px}.license-inner{grid-template-columns:1fr}footer{padding:20px;flex-direction:column;gap:8px}}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Prism</div>
+    <div class="nav-links"><a href="#">Gallery</a><a href="#">Collections</a><a href="#">License</a><a href="#">About</a></div>
+    <a href="#" class="nav-cta">Browse Art</a>
+  </nav>
+  <section class="hero">
+    <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+    <div class="hero-label">Commercial License Included</div>
+    <h1 class="hero-title">Digital art<br/>that <span class="grad">stands out.</span></h1>
+    <p class="hero-desc">600+ premium abstract artworks, gradients, textures, and backgrounds. All royalty-free for commercial use in your projects, products, and brands.</p>
+    <a href="#" style="display:inline-block;padding:16px 36px;background:linear-gradient(135deg,var(--c2),var(--c1));color:#fff;font-size:16px;font-weight:700;border-radius:12px;transition:all .2s">Browse the Collection →</a>
+    <div class="hero-stats">
+      <div class="hs"><strong>600+</strong><span>Artworks</span></div>
+      <div class="hs"><strong>4K</strong><span>Resolution</span></div>
+      <div class="hs"><strong>∞</strong><span>Commercial use</span></div>
+      <div class="hs"><strong>Free</strong><span>Updates forever</span></div>
+    </div>
+  </section>
+  <section class="gallery">
+    <div class="gallery-label">Featured Artworks</div>
+    <div class="gallery-track">
+      <div class="art-card"><div class="art-thumb" style="background:linear-gradient(135deg,#ff006e,#8338ec)">🔮</div><div class="art-info"><div class="art-title">Neon Drift #001</div><div class="art-meta"><span class="art-price">Free</span><span class="art-format">PNG · 4K</span></div></div></div>
+      <div class="art-card"><div class="art-thumb" style="background:linear-gradient(135deg,#3a86ff,#06ffd4)">✦</div><div class="art-info"><div class="art-title">Ocean Void #014</div><div class="art-meta"><span class="art-price">$9</span><span class="art-format">PNG · 4K</span></div></div></div>
+      <div class="art-card"><div class="art-thumb" style="background:linear-gradient(135deg,#ff4500,#ffcc00)">◈</div><div class="art-info"><div class="art-title">Solar Burst #007</div><div class="art-meta"><span class="art-price">$9</span><span class="art-format">PNG · SVG</span></div></div></div>
+      <div class="art-card"><div class="art-thumb" style="background:linear-gradient(135deg,#06ffd4,#3a86ff,#8338ec)">◉</div><div class="art-info"><div class="art-title">Aurora Pack Vol.1</div><div class="art-meta"><span class="art-price">$29</span><span class="art-format">10 files</span></div></div></div>
+      <div class="art-card"><div class="art-thumb" style="background:linear-gradient(135deg,#8338ec,#ff006e,#ffcc00)">⬡</div><div class="art-info"><div class="art-title">Prism Burst #022</div><div class="art-meta"><span class="art-price">$9</span><span class="art-format">PNG · 4K</span></div></div></div>
+      <div class="art-card"><div class="art-thumb" style="background:radial-gradient(#fff 0%,#3a86ff 40%,#060608 100%)">★</div><div class="art-info"><div class="art-title">Star Field #003</div><div class="art-meta"><span class="art-price">Free</span><span class="art-format">PNG · 4K</span></div></div></div>
+    </div>
+  </section>
+  <section class="collections">
+    <h2 class="section-title">Curated Collections</h2>
+    <p class="section-sub">Themed packs for every creative project.</p>
+    <div class="col-grid">
+      <div class="col-item"><div class="col-thumb" style="background:linear-gradient(135deg,#ff006e,#8338ec,#3a86ff)">🌈</div><div class="col-body"><div class="col-name">Gradient Spectrum</div><div class="col-count">80 artworks · $49</div><div class="col-tags"><span class="col-tag">Gradients</span><span class="col-tag">Abstract</span><span class="col-tag">4K</span></div></div></div>
+      <div class="col-item"><div class="col-thumb" style="background:linear-gradient(135deg,#060608,#1a1a2e,#16213e)">🌌</div><div class="col-body"><div class="col-name">Dark Matter</div><div class="col-count">60 artworks · $39</div><div class="col-tags"><span class="col-tag">Dark</span><span class="col-tag">Space</span><span class="col-tag">Texture</span></div></div></div>
+      <div class="col-item"><div class="col-thumb" style="background:linear-gradient(135deg,#f8f4ef,#e8d5b7,#c4a882)">☀️</div><div class="col-body"><div class="col-name">Warm & Earthy</div><div class="col-count">50 artworks · $35</div><div class="col-tags"><span class="col-tag">Warm</span><span class="col-tag">Organic</span><span class="col-tag">Minimal</span></div></div></div>
+    </div>
+  </section>
+  <section class="license">
+    <div class="license-inner">
+      <div class="lic-card"><div class="lic-name">Personal</div><div class="lic-price">$9</div><div class="lic-period">per artwork</div><ul class="lic-features"><li><span class="check">✓</span>Personal projects</li><li><span class="check">✓</span>Social media use</li><li><span class="check">✓</span>High-res download</li><li style="color:rgba(255,255,255,.2)"><span>✗</span>Commercial products</li><li style="color:rgba(255,255,255,.2)"><span>✗</span>Resale rights</li></ul><button class="lic-btn lic-btn-outline">Buy License</button></div>
+      <div class="lic-card lic-card-featured"><div class="lic-name">Commercial</div><div class="lic-price">$29</div><div class="lic-period">per artwork or $99/mo all-access</div><ul class="lic-features"><li><span class="check">✓</span>Unlimited commercial use</li><li><span class="check">✓</span>Client work included</li><li><span class="check">✓</span>Product packaging</li><li><span class="check">✓</span>Merchandise</li><li><span class="check">✓</span>Priority support</li></ul><button class="lic-btn lic-btn-primary">Get Commercial License</button></div>
+    </div>
+  </section>
+  <footer><span>© 2026 Prism Digital Art</span><span>License · FAQ · Contact</span></footer>
+  <div class="template-banner"><div><p><strong>Prism</strong> — Digital Art Marketplace Template</p><p>by TemplateForge</p></div><a href="../../index.html#templates" class="banner-btn">Get This Template →</a></div>
+</body>
+</html>

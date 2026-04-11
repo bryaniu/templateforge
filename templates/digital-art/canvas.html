@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Canvas — Stock Photography Marketplace</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#fff;--bg2:#f8f8f6;--dark:#1a1a18;--teal:#0d9488;--muted:#71717a;--border:#e4e4e7}
+    body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}a{color:inherit;text-decoration:none}
+    nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:64px;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .logo{font-family:'DM Serif Display',serif;font-size:22px;color:var(--dark)}
+    .logo em{font-style:italic;color:var(--teal)}
+    .nav-links{display:flex;gap:28px}.nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}.nav-links a:hover{color:var(--dark)}
+    .nav-right{display:flex;gap:10px}
+    .btn-ghost{padding:8px 18px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--dark);transition:all .2s}.btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+    .btn-teal{padding:8px 18px;background:var(--teal);color:#fff;font-size:13px;font-weight:700;border-radius:8px;transition:all .2s}.btn-teal:hover{background:#0f766e;transform:translateY(-1px)}
+    /* HERO */
+    .hero{background:var(--dark);padding:80px 52px;text-align:center;position:relative;overflow:hidden}
+    .hero-bg-grid{position:absolute;inset:0;opacity:.04;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:48px 48px}
+    .hero-content{position:relative}
+    .hero-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.2);border:1px solid rgba(13,148,136,.3);color:#5eead4;font-size:12px;font-weight:700;padding:6px 14px;border-radius:100px;margin-bottom:24px}
+    .hero-title{font-family:'DM Serif Display',serif;font-size:clamp(44px,7vw,84px);color:#fff;line-height:1;letter-spacing:-2px;margin-bottom:16px}
+    .hero-title em{font-style:italic;color:#5eead4}
+    .hero-desc{font-size:18px;color:rgba(255,255,255,.55);max-width:520px;margin:0 auto 36px;line-height:1.7}
+    /* SEARCH BAR */
+    .search-bar{display:flex;max-width:640px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.3)}
+    .search-category{padding:0 20px;border-right:1px solid var(--border);font-size:14px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;border-top:none;border-bottom:none;border-left:none;font-family:inherit;white-space:nowrap}
+    .search-input{flex:1;padding:16px 20px;border:none;font-size:15px;font-family:inherit;color:var(--dark);outline:none}
+    .search-btn{padding:12px 24px;background:var(--teal);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .2s}.search-btn:hover{background:#0f766e}
+    .hero-tags{display:flex;gap:8px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+    .hero-tag{font-size:12px;color:rgba(255,255,255,.4);background:rgba(255,255,255,.07);padding:5px 12px;border-radius:100px;cursor:pointer;border:1px solid rgba(255,255,255,.1);transition:all .2s}.hero-tag:hover{color:#fff;border-color:rgba(255,255,255,.2)}
+    /* STATS */
+    .stats-strip{display:grid;grid-template-columns:repeat(4,1fr);padding:32px 52px;border-bottom:1px solid var(--border);background:var(--bg2)}
+    .stat-item{text-align:center;padding:0 20px;border-right:1px solid var(--border)}
+    .stat-item:last-child{border-right:none}
+    .stat-num{font-family:'DM Serif Display',serif;font-size:36px;color:var(--dark);margin-bottom:4px}
+    .stat-label{font-size:13px;color:var(--muted)}
+    /* GALLERY */
+    .gallery-section{padding:64px 52px;max-width:1300px;margin:0 auto}
+    .gallery-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+    .gallery-title{font-family:'DM Serif Display',serif;font-size:clamp(24px,3vw,36px)}
+    .filter-row{display:flex;gap:8px;flex-wrap:wrap}
+    .filter-chip{padding:7px 16px;border:1px solid var(--border);border-radius:100px;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;background:none;font-family:inherit}
+    .filter-chip.active,.filter-chip:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
+    .masonry-grid{columns:4;column-gap:14px}
+    .photo-item{break-inside:avoid;margin-bottom:14px;border-radius:10px;overflow:hidden;cursor:pointer;position:relative}
+    .photo-item:hover .photo-hover{opacity:1}
+    .photo-thumb{width:100%;display:flex;align-items:center;justify-content:center;font-size:clamp(28px,5vw,48px)}
+    .photo-hover{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;transition:opacity .25s;display:flex;flex-direction:column;justify-content:flex-end;padding:14px}
+    .photo-hover-title{font-size:13px;font-weight:700;color:#fff;margin-bottom:4px}
+    .photo-hover-meta{font-size:11px;color:rgba(255,255,255,.6);display:flex;justify-content:space-between}
+    .photo-hover-price{color:#5eead4;font-weight:700}
+    footer{padding:28px 52px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+    .template-banner{position:fixed;bottom:20px;right:20px;z-index:999;background:var(--dark);border:1px solid rgba(13,148,136,.35);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+    .template-banner p{font-size:13px;color:rgba(255,255,255,.4)}.template-banner strong{color:#fff}
+    .banner-btn{padding:8px 16px;background:var(--teal);color:#fff;font-size:13px;font-weight:700;border-radius:6px;white-space:nowrap}
+    @media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.hero{padding:48px 20px}.search-bar{flex-direction:column;border-radius:12px;overflow:hidden}.search-category{border-right:none;border-bottom:1px solid var(--border);justify-content:center}.stats-strip{grid-template-columns:1fr 1fr}.stat-item{border-right:none;padding:12px 0}.gallery-section{padding:48px 20px}.masonry-grid{columns:2}footer{padding:20px;flex-direction:column;gap:8px}}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Canvas <em>Photos</em></div>
+    <div class="nav-links"><a href="#">Browse</a><a href="#">Collections</a><a href="#">Contribute</a><a href="#">Pricing</a></div>
+    <div class="nav-right"><a href="#" class="btn-ghost">Log in</a><a href="#" class="btn-teal">Get Full Access</a></div>
+  </nav>
+  <section class="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <div class="hero-chip">✦ 2M+ royalty-free images</div>
+      <h1 class="hero-title">Beautiful photos<br/>for <em>every</em> project.</h1>
+      <p class="hero-desc">Millions of stunning, high-resolution images licensed for commercial use. No attribution required. Download and create.</p>
+      <div class="search-bar">
+        <button class="search-category">📷 All Photos ▾</button>
+        <input type="text" class="search-input" placeholder="Search 2M+ images..."/>
+        <button class="search-btn">Search</button>
+      </div>
+      <div class="hero-tags"><span class="hero-tag">Nature</span><span class="hero-tag">Architecture</span><span class="hero-tag">Business</span><span class="hero-tag">People</span><span class="hero-tag">Abstract</span><span class="hero-tag">Technology</span><span class="hero-tag">Food</span><span class="hero-tag">Travel</span></div>
+    </div>
+  </section>
+  <div class="stats-strip">
+    <div class="stat-item"><div class="stat-num">2M+</div><div class="stat-label">Photos & Illustrations</div></div>
+    <div class="stat-item"><div class="stat-num">48K</div><div class="stat-label">Contributing Artists</div></div>
+    <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Commercial License</div></div>
+    <div class="stat-item"><div class="stat-num">4K+</div><div class="stat-label">Resolution Guaranteed</div></div>
+  </div>
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <h2 class="gallery-title">Trending Photos</h2>
+      <div class="filter-row">
+        <button class="filter-chip active">All</button>
+        <button class="filter-chip">Nature</button>
+        <button class="filter-chip">Urban</button>
+        <button class="filter-chip">People</button>
+        <button class="filter-chip">Abstract</button>
+      </div>
+    </div>
+    <div class="masonry-grid">
+      <div class="photo-item"><div class="photo-thumb" style="background:linear-gradient(160deg,#d4e8d8,#8db89a);height:260px;">🌿</div><div class="photo-hover"><div class="photo-hover-title">Forest Morning</div><div class="photo-hover-meta"><span>By James W.</span><span class="photo-hover-price">Free</span></div></div></div>
+      <div class="photo-item"><div class="photo-thumb" style="background:linear-gradient(160deg,#0a0f1a,#1a2535);height:180px;">🏙</div><div class="photo-hover"><div class="photo-hover-title">City Lights</div><div class="photo-hover-meta"><span>By Ana S.</span><span class="photo-hover-price">$9</span></div></div></div>
+      <div class="photo-item"><div class="photo-thumb" style="background:linear-gradient(160deg,#1a0a0a,#3d1818);height:220px;">🌊</div><div class="photo-hover"><div class="photo-hover-title">Ocean Spray</div><div class="photo-hover-meta"><span>By M. Bell</span><span class="photo-hover-price">Free</span></div></div></div>
+      <div class="photo-item"><div class="photo-thumb" style="background:linear-gradient(160deg,#2d1a08,#5c3d18);height:200px;">🏔</div><div class="photo-hover"><div class="photo-hover-title">Mountain Peak</div><div class="photo-hover-meta"><span>By P. Nair</span><span class="photo-hover-price">$12</span></div></div></div>
+      <div class="photo-item"><div class="photo-thumb" style="background:linear-gradient(160deg,#f8e8d4,#e8c4a0);height:300px;">☀️</div><div class="photo-hover"><div class="photo-hover-title">Golden Hour</div><div class="photo-hover-meta"><span>By L. Roth</span><span class="photo-hover-price">Free</span></div></div></div>
+      <div class="photo-item"><div class="photo-thumb" style="background:linear-gradient(160deg,#1a1a2e,#2d2d4e);height:200px;">✦</div><div class="photo-hover"><div class="photo-hover-title">Milky Way</div><div class="photo-hover-meta"><span>By T. Chen</span><span class="photo-hover-price">$9</span></div></div></div>
+      <div class="photo-item"><div class="photo-thumb" style="background:linear-gradient(160deg,#0a1a0a,#1a3d1a);height:240px;">🌲</div><div class="photo-hover"><div class="photo-hover-title">Redwood Path</div><div class="photo-hover-meta"><span>By S. Kim</span><span class="photo-hover-price">Free</span></div></div></div>
+      <div class="photo-item"><div class="photo-thumb" style="background:linear-gradient(160deg,#1a0a1a,#3d1a3d);height:180px;">🦋</div><div class="photo-hover"><div class="photo-hover-title">Macro World</div><div class="photo-hover-meta"><span>By J. Park</span><span class="photo-hover-price">$9</span></div></div></div>
+    </div>
+  </section>
+  <footer><span>© 2026 Canvas Photos</span><span>License · About · Contribute</span></footer>
+  <div class="template-banner"><div><p><strong>Canvas</strong> — Stock Photography Template</p><p>by TemplateForge</p></div><a href="../../index.html#templates" class="banner-btn">Get This Template →</a></div>
+  <script>document.querySelectorAll('.filter-chip').forEach(c=>c.addEventListener('click',()=>{document.querySelectorAll('.filter-chip').forEach(x=>x.classList.remove('active'));c.classList.add('active')}));</script>
+</body>
+</html>

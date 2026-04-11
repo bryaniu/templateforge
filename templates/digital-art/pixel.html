@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Pixel — Icon & Illustration Pack Store</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#fafafa;--dark:#111;--blue:#2563eb;--blue-l:#dbeafe;--muted:#6b7280;--border:#e5e7eb;--card:#fff}
+    body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--dark);overflow-x:hidden}a{color:inherit;text-decoration:none}
+    nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:64px;background:rgba(250,250,250,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+    .logo{font-size:20px;font-weight:800;letter-spacing:-.5px}
+    .logo span{color:var(--blue)}
+    .nav-links{display:flex;gap:24px}.nav-links a{font-size:14px;font-weight:500;color:var(--muted);transition:color .2s}.nav-links a:hover{color:var(--dark)}
+    .nav-right{display:flex;gap:8px}
+    .btn-sm{padding:8px 16px;font-size:13px;font-weight:600;border-radius:8px;transition:all .2s}
+    .btn-ghost{border:1px solid var(--border);color:var(--dark)}.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+    .btn-blue{background:var(--blue);color:#fff;border:none}.btn-blue:hover{background:#1d4ed8;transform:translateY(-1px)}
+    /* HERO */
+    .hero{padding:80px 52px;text-align:center;background:linear-gradient(180deg,var(--blue-l) 0%,var(--bg) 100%)}
+    .hero-eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:3px;color:var(--blue);margin-bottom:16px}
+    .hero-title{font-size:clamp(40px,6vw,72px);font-weight:800;letter-spacing:-2.5px;line-height:1;margin-bottom:16px}
+    .hero-title span{color:var(--blue)}
+    .hero-desc{font-size:17px;color:var(--muted);max-width:500px;margin:0 auto 32px;line-height:1.7}
+    .hero-search{display:flex;max-width:500px;margin:0 auto 48px;gap:8px}
+    .hero-search input{flex:1;padding:13px 18px;background:#fff;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}.hero-search input:focus{border-color:var(--blue)}
+    .hero-search button{padding:13px 24px;background:var(--blue);color:#fff;font-size:14px;font-weight:700;border-radius:10px;border:none;cursor:pointer;font-family:inherit;transition:all .2s}.hero-search button:hover{background:#1d4ed8}
+    /* PACK PREVIEW */
+    .icon-preview{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+    .icon-bubble{width:64px;height:64px;background:#fff;border:1px solid var(--border);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:transform .2s}.icon-bubble:hover{transform:scale(1.1)}
+    .hero-stats-row{display:flex;gap:32px;justify-content:center;flex-wrap:wrap}
+    .hstat{font-size:14px;color:var(--muted);display:flex;align-items:center;gap:6px}
+    .hstat strong{color:var(--dark);font-size:15px}
+    /* PACKS */
+    .packs{padding:80px 52px;max-width:1200px;margin:0 auto}
+    .packs-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+    .section-title{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-1px}
+    .view-all{font-size:13px;font-weight:700;color:var(--blue)}
+    .tabs{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+    .tab{padding:8px 18px;border:1px solid var(--border);border-radius:100px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;background:none;font-family:inherit}
+    .tab.active,.tab:hover{background:var(--dark);color:#fff;border-color:var(--dark)}
+    .packs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .pack-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .25s;cursor:pointer}
+    .pack-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.08);border-color:rgba(37,99,235,.2)}
+    .pack-thumb{padding:24px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .pack-icon{aspect-ratio:1;background:var(--bg);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+    .pack-body{padding:16px 20px 20px;border-top:1px solid var(--border)}
+    .pack-name{font-size:16px;font-weight:700;margin-bottom:4px}
+    .pack-meta{font-size:13px;color:var(--muted);margin-bottom:14px}
+    .pack-footer{display:flex;align-items:center;justify-content:space-between}
+    .pack-price{font-size:20px;font-weight:800}
+    .pack-price .free{color:var(--blue)}
+    .pack-btn{padding:8px 18px;background:var(--blue);color:#fff;font-size:13px;font-weight:700;border-radius:8px;border:none;cursor:pointer;font-family:inherit;transition:all .2s}.pack-btn:hover{background:#1d4ed8}
+    /* FREE SECTION */
+    .free-section{padding:80px 52px;background:var(--blue);text-align:center}
+    .free-section h2{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-2px;color:#fff;margin-bottom:12px}
+    .free-section p{color:rgba(255,255,255,.7);font-size:17px;margin-bottom:32px}
+    .free-icons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+    .free-icon{width:56px;height:56px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px}
+    footer{padding:28px 52px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+    .template-banner{position:fixed;bottom:20px;right:20px;z-index:999;background:var(--dark);border:1px solid rgba(37,99,235,.35);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 8px 32px rgba(0,0,0,.2)}
+    .template-banner p{font-size:13px;color:rgba(255,255,255,.4)}.template-banner strong{color:#fff}
+    .banner-btn{padding:8px 16px;background:var(--blue);color:#fff;font-size:13px;font-weight:700;border-radius:6px;white-space:nowrap}
+    @media(max-width:900px){nav{padding:0 20px}.nav-links{display:none}.hero{padding:56px 20px}.packs{padding:56px 20px}.packs-grid{grid-template-columns:1fr}.free-section{padding:56px 20px}footer{padding:20px;flex-direction:column;gap:8px}}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Pixel<span>.</span></div>
+    <div class="nav-links"><a href="#">Icons</a><a href="#">Illustrations</a><a href="#">Free</a><a href="#">Pricing</a></div>
+    <div class="nav-right"><a href="#" class="btn-sm btn-ghost">Log in</a><a href="#" class="btn-sm btn-blue">Get All Access</a></div>
+  </nav>
+  <section class="hero">
+    <div class="hero-eyebrow">Icons · Illustrations · Graphics</div>
+    <h1 class="hero-title">50,000+ assets,<br/>one <span>subscription.</span></h1>
+    <p class="hero-desc">Professional icons, illustrations, and graphics for your apps, websites, and presentations. All commercial use included.</p>
+    <div class="hero-search"><input type="text" placeholder="Search icons, illustrations..."/><button>Search</button></div>
+    <div class="icon-preview">
+      <div class="icon-bubble">🏠</div><div class="icon-bubble">⚡</div><div class="icon-bubble">💬</div><div class="icon-bubble">📊</div>
+      <div class="icon-bubble">🔔</div><div class="icon-bubble">🎨</div><div class="icon-bubble">🔍</div><div class="icon-bubble">⚙️</div>
+      <div class="icon-bubble">📱</div><div class="icon-bubble">🌐</div><div class="icon-bubble">💡</div><div class="icon-bubble">🔒</div>
+    </div>
+    <div class="hero-stats-row">
+      <div class="hstat">✦ <strong>50,000+</strong> assets</div>
+      <div class="hstat">✦ <strong>New</strong> every week</div>
+      <div class="hstat">✦ <strong>SVG + PNG</strong> formats</div>
+      <div class="hstat">✦ <strong>Commercial</strong> license</div>
+    </div>
+  </section>
+  <section class="packs">
+    <div class="packs-header"><h2 class="section-title">Icon Packs</h2><a href="#" class="view-all">View All →</a></div>
+    <div class="tabs">
+      <button class="tab active">All</button><button class="tab">UI Icons</button><button class="tab">Illustrations</button><button class="tab">Logos</button><button class="tab">3D</button>
+    </div>
+    <div class="packs-grid">
+      <div class="pack-card">
+        <div class="pack-thumb" style="background:#eef2ff;">
+          <div class="pack-icon">🏠</div><div class="pack-icon">⚡</div><div class="pack-icon">💬</div><div class="pack-icon">📊</div>
+          <div class="pack-icon">🔔</div><div class="pack-icon">📁</div><div class="pack-icon">🔍</div><div class="pack-icon">⚙️</div>
+        </div>
+        <div class="pack-body"><div class="pack-name">Outline UI Icons</div><div class="pack-meta">420 icons · SVG + PNG · 4 sizes</div><div class="pack-footer"><div class="pack-price"><span class="free">Free</span></div><button class="pack-btn">Download</button></div></div>
+      </div>
+      <div class="pack-card">
+        <div class="pack-thumb" style="background:#f0fdf4;">
+          <div class="pack-icon">🌿</div><div class="pack-icon">🌸</div><div class="pack-icon">🌊</div><div class="pack-icon">🦋</div>
+          <div class="pack-icon">🐝</div><div class="pack-icon">🌙</div><div class="pack-icon">⭐</div><div class="pack-icon">🌈</div>
+        </div>
+        <div class="pack-body"><div class="pack-name">Nature Illustrations</div><div class="pack-meta">200 illustrations · Vector · Editable</div><div class="pack-footer"><div class="pack-price">$29</div><button class="pack-btn">Buy Pack</button></div></div>
+      </div>
+      <div class="pack-card">
+        <div class="pack-thumb" style="background:#fdf4ff;">
+          <div class="pack-icon">💻</div><div class="pack-icon">📱</div><div class="pack-icon">🎧</div><div class="pack-icon">⌨️</div>
+          <div class="pack-icon">🖥</div><div class="pack-icon">📷</div><div class="pack-icon">🖱</div><div class="pack-icon">🔋</div>
+        </div>
+        <div class="pack-body"><div class="pack-name">Tech 3D Icons</div><div class="pack-meta">180 icons · 3D render · PNG 4K</div><div class="pack-footer"><div class="pack-price">$49</div><button class="pack-btn">Buy Pack</button></div></div>
+      </div>
+    </div>
+  </section>
+  <section class="free-section">
+    <h2>Start with 500 free assets.</h2>
+    <p>No account needed. Download immediately. Use commercially.</p>
+    <div class="free-icons">
+      <div class="free-icon">🏠</div><div class="free-icon">⚡</div><div class="free-icon">💬</div><div class="free-icon">📊</div>
+      <div class="free-icon">🔔</div><div class="free-icon">🎨</div><div class="free-icon">🔍</div><div class="free-icon">⚙️</div>
+    </div>
+    <a href="#" style="display:inline-block;padding:14px 32px;background:#fff;color:var(--blue);font-size:15px;font-weight:700;border-radius:10px;transition:all .2s">Browse Free Assets →</a>
+  </section>
+  <footer><span>© 2026 Pixel Assets</span><span>License · API · Affiliate</span></footer>
+  <div class="template-banner"><div><p><strong>Pixel</strong> — Icon & Illustration Store Template</p><p>by TemplateForge</p></div><a href="../../index.html#templates" class="banner-btn">Get This Template →</a></div>
+  <script>document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active')}));</script>
+</body>
+</html>
