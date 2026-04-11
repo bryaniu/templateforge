@@ -2,3 +2,5 @@ node_modules/
 .env
 .DS_Store
 *.log
+node-v24.14.1-darwin-arm64/
+node_modules/
