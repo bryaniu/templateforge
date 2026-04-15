@@ -6,7 +6,7 @@ const TEMPLATES = [
   {
     id: 101, name: 'Vanta', category: 'portfolio',
     desc: 'Dark developer portfolio with terminal hero, animated skill bars, project case studies, and a mono-coded aesthetic.',
-    price: 39, originalPrice: null, badge: 'new', rating: 4.9, reviews: 148,
+    price: 14, originalPrice: null, badge: 'new', rating: 4.9, reviews: 148,
     emoji: '⌨', gradient: 'linear-gradient(135deg, #0a0e1a 0%, #0f1525 50%, #151d35 100%)',
     accent: '#00ff88',
     tags: ['HTML/CSS/JS', 'JetBrains Mono'],
@@ -15,7 +15,7 @@ const TEMPLATES = [
   {
     id: 102, name: 'Lumina', category: 'portfolio',
     desc: 'Bold creative designer portfolio with oversized type, a full-bleed work grid, client testimonials, and a punchy contact CTA.',
-    price: 49, originalPrice: null, badge: null, rating: 4.8, reviews: 112,
+    price: 17, originalPrice: null, badge: null, rating: 4.8, reviews: 112,
     emoji: '🎨', gradient: 'linear-gradient(135deg, #1a0f00 0%, #2d1a00 40%, #ff4d0022 100%)',
     accent: '#ff4d00',
     tags: ['HTML/CSS/JS', 'Syne Font'],
@@ -24,7 +24,7 @@ const TEMPLATES = [
   {
     id: 103, name: 'Aperture', category: 'portfolio',
     desc: 'Cinematic photographer portfolio with a full-bleed hero, masonry photo gallery, awards section, and italic serif typography.',
-    price: 59, originalPrice: 79, badge: 'sale', rating: 5.0, reviews: 87,
+    price: 19, originalPrice: 29, badge: 'sale', rating: 5.0, reviews: 87,
     emoji: '📷', gradient: 'linear-gradient(135deg, #080808 0%, #1a1408 50%, #111 100%)',
     accent: '#c9a96e',
     tags: ['HTML/CSS/JS', 'Playfair Display'],
@@ -42,7 +42,7 @@ const TEMPLATES = [
   {
     id: 105, name: 'Kinetic', category: 'portfolio',
     desc: 'Dynamic motion & 3D designer portfolio with animated gradient orbs, a horizontal reel, skill bars, and a glowing contact section.',
-    price: 69, originalPrice: null, badge: 'new', rating: 4.9, reviews: 63,
+    price: 22, originalPrice: null, badge: 'new', rating: 4.9, reviews: 63,
     emoji: '◉', gradient: 'linear-gradient(135deg, #050507 0%, #1a0030 50%, #300050 100%)',
     accent: '#7000ff',
     tags: ['HTML/CSS/JS', 'Space Grotesk'],
@@ -52,7 +52,7 @@ const TEMPLATES = [
   {
     id: 201, name: 'Beacon', category: 'ecommerce',
     desc: 'Luxury fashion store with full-bleed editorial hero, shoppable lookbook grid, and quick-add drawer.',
-    price: 59, originalPrice: 79, badge: 'sale', rating: 4.9, reviews: 184,
+    price: 22, originalPrice: 34, badge: 'sale', rating: 4.9, reviews: 184,
     emoji: '👗', gradient: 'linear-gradient(135deg, #0a0805 0%, #2d1f0a 50%, #0a0805 100%)',
     accent: '#c9a84c',
     tags: ['HTML/CSS/JS', 'Cormorant Garamond'],
@@ -70,7 +70,7 @@ const TEMPLATES = [
   {
     id: 203, name: 'Flux', category: 'ecommerce',
     desc: 'Dark electronics store with glowing product cards, brand strip, spec highlights, and cart button.',
-    price: 49, originalPrice: null, badge: 'new', rating: 4.7, reviews: 98,
+    price: 17, originalPrice: null, badge: 'new', rating: 4.7, reviews: 98,
     emoji: '💻', gradient: 'linear-gradient(135deg, #050508 0%, #0c0c14 50%, #1a1a4e 100%)',
     accent: '#3b82f6',
     tags: ['HTML/CSS/JS', 'Space Grotesk'],
@@ -80,7 +80,7 @@ const TEMPLATES = [
   {
     id: 301, name: 'Forge', category: 'agency',
     desc: 'Bold creative agency with oversized title, scrolling marquee, case study grid, and services section.',
-    price: 59, originalPrice: null, badge: null, rating: 4.8, reviews: 112,
+    price: 19, originalPrice: null, badge: null, rating: 4.8, reviews: 112,
     emoji: '🔥', gradient: 'linear-gradient(135deg, #0a0a0a 0%, #1a0800 50%, #0a0a0a 100%)',
     accent: '#ff4500',
     tags: ['HTML/CSS/JS', 'Syne Font'],
@@ -89,7 +89,7 @@ const TEMPLATES = [
   {
     id: 302, name: 'Meridian', category: 'agency',
     desc: 'Digital marketing agency with live metrics dashboard hero, services grid, and results counters.',
-    price: 49, originalPrice: null, badge: 'new', rating: 4.9, reviews: 76,
+    price: 17, originalPrice: null, badge: 'new', rating: 4.9, reviews: 76,
     emoji: '📈', gradient: 'linear-gradient(135deg, #12101f 0%, #1e1b4b 50%, #12101f 100%)',
     accent: '#8b5cf6',
     tags: ['HTML/CSS/JS', 'Plus Jakarta Sans'],
@@ -98,7 +98,7 @@ const TEMPLATES = [
   {
     id: 303, name: 'Nova Studio', category: 'agency',
     desc: 'Boutique design studio with editorial serif typography, bento work grid, and team showcase.',
-    price: 69, originalPrice: null, badge: null, rating: 5.0, reviews: 54,
+    price: 24, originalPrice: null, badge: null, rating: 5.0, reviews: 54,
     emoji: '✦', gradient: 'linear-gradient(135deg, #fffef9 0%, #f5f2e8 100%)',
     accent: '#0d9488',
     tags: ['HTML/CSS/JS', 'Fraunces Font'],
@@ -117,7 +117,7 @@ const TEMPLATES = [
   {
     id: 402, name: 'Signal', category: 'blog',
     desc: 'Dark GitHub-style dev blog with trending sidebar, tabbed feed, monospace aesthetics, and weekly newsletter.',
-    price: 39, originalPrice: null, badge: 'new', rating: 4.9, reviews: 143,
+    price: 12, originalPrice: null, badge: 'new', rating: 4.9, reviews: 143,
     emoji: '⌨', gradient: 'linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%)',
     accent: '#58a6ff',
     tags: ['HTML/CSS/JS', 'JetBrains Mono'],
@@ -127,7 +127,7 @@ const TEMPLATES = [
   {
     id: 501, name: 'Pulse', category: 'startup',
     desc: 'SaaS product landing page with animated orbs, email waitlist, feature cards, and 3-tier pricing table.',
-    price: 49, originalPrice: null, badge: null, rating: 4.8, reviews: 96,
+    price: 17, originalPrice: null, badge: null, rating: 4.8, reviews: 96,
     emoji: '⚡', gradient: 'linear-gradient(135deg, #07070f 0%, #1e1b4b 50%, #07070f 100%)',
     accent: '#a78bfa',
     tags: ['HTML/CSS/JS', 'Plus Jakarta Sans'],
@@ -155,7 +155,7 @@ const TEMPLATES = [
   {
     id: 602, name: 'Canvas', category: 'digital-art',
     desc: 'Stock photography platform with dark hero, keyword search bar, masonry photo grid, and trending tags.',
-    price: 49, originalPrice: null, badge: 'new', rating: 4.8, reviews: 64,
+    price: 14, originalPrice: null, badge: 'new', rating: 4.8, reviews: 64,
     emoji: '📷', gradient: 'linear-gradient(135deg, #1a1a18 0%, #2d2d28 50%, #1a1a18 100%)',
     accent: '#0d9488',
     tags: ['HTML/CSS/JS', 'DM Serif Display'],
@@ -164,7 +164,7 @@ const TEMPLATES = [
   {
     id: 603, name: 'Pixel', category: 'digital-art',
     desc: 'Icon & illustration pack store with live icon preview grid, tabbed packs, and free asset section.',
-    price: 39, originalPrice: null, badge: null, rating: 4.7, reviews: 117,
+    price: 12, originalPrice: null, badge: null, rating: 4.7, reviews: 117,
     emoji: '🎨', gradient: 'linear-gradient(135deg, #eef2ff 0%, #dbeafe 100%)',
     accent: '#2563eb',
     tags: ['HTML/CSS/JS', 'Inter Font'],
